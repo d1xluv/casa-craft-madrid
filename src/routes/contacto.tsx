@@ -7,8 +7,8 @@ export const Route = createFileRoute("/contacto")({
   component: Contact,
   head: () => ({
     meta: [
-      { title: "Contacto · Reformas Alcalá Madrid" },
-      { name: "description", content: "Contacta con Reformas Alcalá. Llama al 671 155 809 o escribe por WhatsApp. Toda Madrid." },
+      { title: "Contacto · Pinturas Alcalá Madrid" },
+      { name: "description", content: "Contacta con Pinturas Alcalá. Llama al 671 155 809 o escribe por WhatsApp. Toda Madrid." },
     ],
   }),
 });

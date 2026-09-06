@@ -11,7 +11,7 @@ export const Route = createFileRoute("/proyectos")({
   component: Projects,
   head: () => ({
     meta: [
-      { title: "Proyectos · Reformas Alcalá Madrid" },
+      { title: "Proyectos · Pinturas Alcalá Madrid" },
       { name: "description", content: "Galería de reformas integrales, baños, cocinas y obras de albañilería realizadas en Madrid." },
     ],
   }),

@@ -12,12 +12,12 @@ const es: Dict = {
   "nav.contact": "Contacto",
   "nav.cta": "Pedir presupuesto",
 
-  "hero.eyebrow": "Reformas Alcalá · Madrid",
-  "hero.title": "Reformas y obra de primera, hechas con las manos.",
+  "hero.eyebrow": "Pinturas Alcalá · Toda la Comunidad de Madrid",
+  "hero.title": "Pintura y reformas con acabado de primera.",
   "hero.subtitle": "Albañil de primera, pintor y especialista en reformas integrales de pisos. Trabajo en toda la Comunidad de Madrid.",
   "hero.cta.primary": "Llamar 671 155 809",
   "hero.cta.secondary": "Ver proyectos",
-  "hero.stat.years": "Años de oficio",
+  "hero.stat.years": "Años de experiencia",
   "hero.stat.projects": "Reformas entregadas",
   "hero.stat.area": "Toda Madrid",
 
@@ -46,9 +46,23 @@ const es: Dict = {
   "projects.tag.brick": "Albañilería",
   "projects.tag.reform": "Obra en curso",
 
+  "projects.d.apartment": "Vivienda de 92 m² reformada al completo en 6 semanas: nueva distribución, alisado de paredes, tarima flotante, rodapié y pintura en toda la casa. Entregada limpia y lista para entrar a vivir.",
+  "projects.d.bath": "Cambio de bañera por plato de ducha antideslizante, alicatado porcelánico de suelo a techo, mampara, fontanería nueva y mueble a medida. Terminado en 8 días sin dejar la casa sin agua.",
+  "projects.d.kitchen": "Apertura de tabique para cocina abierta al salón, refuerzo, instalación eléctrica renovada, frente alicatado y pintura lavable. Presupuesto cerrado y plazo cumplido.",
+  "projects.d.painting": "Eliminación de gotelé, alisado a dos manos de plaste, imprimación y dos capas de pintura plástica mate. Muebles y suelos protegidos, cero manchas al terminar.",
+  "projects.d.brick": "Muro de ladrillo visto con junta rehundida, ejecutado a plomo y con rejuntado limpio. Trabajo de albañilería de primera con acabado que se ve, no se esconde.",
+  "projects.d.reform": "Obra en curso: derribo, nuevas instalaciones y preparación de paramentos. Seguimiento con fotos diarias para el cliente y retirada de escombros incluida.",
+
+  "brand.name": "Pinturas Alcalá",
+  "brand.tagline": "Pintura y reformas profesionales",
+  "brand.motto": "Tu hogar, en buenas manos",
+  "brand.quote": "Presupuestos sin compromiso",
+  "brand.years": "25 años de experiencia",
+  "cards.hint": "Pasa el cursor para ver el detalle",
+
   "about.eyebrow": "Sobre mí",
   "about.title": "Más de dos décadas de oficio en Madrid.",
-  "about.p1": "Soy albañil de primera, pintor y reformista. Llevo toda mi vida laboral dedicado a las obras: empecé como peón, aprendí el oficio en obra real y hoy dirijo Reformas Alcalá, un pequeño equipo que entrega reformas integrales en toda la Comunidad de Madrid.",
+  "about.p1": "Soy albañil de primera, pintor y reformista. Llevo toda mi vida laboral dedicado a las obras: empecé como peón, aprendí el oficio en obra real y hoy dirijo Pinturas Alcalá, un pequeño equipo que entrega reformas integrales en toda la Comunidad de Madrid.",
   "about.p2": "Trabajo con honestidad: presupuestos cerrados, plazos cumplidos y obra limpia. Cada reforma se trata como si fuera mi propia casa.",
   "about.skills.title": "Especialidades",
   "about.values.title": "Cómo trabajo",
@@ -75,7 +89,7 @@ const es: Dict = {
   "contact.form.send": "Enviar mensaje",
   "contact.form.sent": "Gracias, te contactaré hoy mismo.",
 
-  "footer.tag": "Albañilería · Pintura · Reformas integrales",
+  "footer.tag": "Pintura interior y exterior · Alisado · Tarima y rodapié · Pequeñas reformas y albañilería",
   "footer.rights": "Todos los derechos reservados.",
 };
 
@@ -87,8 +101,8 @@ const en: Dict = {
   "nav.contact": "Contact",
   "nav.cta": "Request a quote",
 
-  "hero.eyebrow": "Reformas Alcalá · Madrid",
-  "hero.title": "First-class building and renovations, made by hand.",
+  "hero.eyebrow": "Pinturas Alcalá · All of Madrid",
+  "hero.title": "Painting and renovations with a first-class finish.",
   "hero.subtitle": "First-class bricklayer, painter and specialist in full apartment renovations. Serving all of Madrid.",
   "hero.cta.primary": "Call 671 155 809",
   "hero.cta.secondary": "View projects",
@@ -121,9 +135,23 @@ const en: Dict = {
   "projects.tag.brick": "Bricklaying",
   "projects.tag.reform": "Work in progress",
 
+  "projects.d.apartment": "92 m² home fully renovated in 6 weeks: new layout, skimmed walls, engineered flooring, skirting and paint throughout. Handed over clean and ready to move in.",
+  "projects.d.bath": "Bathtub swapped for a non-slip shower tray, floor-to-ceiling porcelain tiling, screen, new plumbing and bespoke unit. Finished in 8 days with no water cut-offs.",
+  "projects.d.kitchen": "Wall opened up for a kitchen-diner, reinforced structure, rewired electrics, tiled splashback and washable paint. Fixed quote, delivered on time.",
+  "projects.d.painting": "Popcorn texture removed, two coats of filler skimmed flat, primer and two coats of matt emulsion. Furniture and floors protected, not a single mark left.",
+  "projects.d.brick": "Exposed brick wall with recessed joints, built true to plumb with clean pointing. First-class bricklaying meant to be seen, not hidden.",
+  "projects.d.reform": "Work in progress: strip-out, new services and wall preparation. Daily photo updates for the client and debris removal included.",
+
+  "brand.name": "Pinturas Alcalá",
+  "brand.tagline": "Professional painting & renovations",
+  "brand.motto": "Your home, in good hands",
+  "brand.quote": "Free no-obligation quotes",
+  "brand.years": "25 years of experience",
+  "cards.hint": "Hover to see the details",
+
   "about.eyebrow": "About",
   "about.title": "Two decades of trade in Madrid.",
-  "about.p1": "I'm a first-class bricklayer, painter and renovator. My whole working life has been on the tools: I started as a labourer, learned the trade on real sites, and today I run Reformas Alcalá — a small team delivering full renovations across the Madrid region.",
+  "about.p1": "I'm a first-class bricklayer, painter and renovator. My whole working life has been on the tools: I started as a labourer, learned the trade on real sites, and today I run Pinturas Alcalá — a small team delivering full renovations across the Madrid region.",
   "about.p2": "I work with honesty: fixed quotes, deadlines met, clean sites. Every renovation is treated as if it were my own home.",
   "about.skills.title": "Specialities",
   "about.values.title": "How I work",
@@ -150,7 +178,7 @@ const en: Dict = {
   "contact.form.send": "Send message",
   "contact.form.sent": "Thanks — I'll be in touch today.",
 
-  "footer.tag": "Bricklaying · Painting · Full renovations",
+  "footer.tag": "Interior & exterior painting · Skimming · Flooring · Small building works",
   "footer.rights": "All rights reserved.",
 };
 
