@@ -5,7 +5,6 @@ import heroImg from "@/assets/hero-bricklayer.jpg";
 import projApartment from "@/assets/project-apartment.jpg";
 import projBath from "@/assets/project-bathroom.jpg";
 import projKitchen from "@/assets/project-kitchen.jpg";
-import logoAsset from "@/assets/logo.png.asset.json";
 import { WorkCard } from "@/components/site/WorkCard";
 import { Reveal, useParallax } from "@/components/site/Reveal";
 
@@ -201,15 +200,6 @@ function Home() {
             </Reveal>
           ))}
         </div>
-      </section>
-
-      {/* BRAND CARD */}
-      <section className="container-page pb-20">
-        <Reveal variant="scale">
-          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
-            <img src={logoAsset.url} alt="Tarjeta de Reformas HZ: reformas, albañilería y pintura, 671 155 809" loading="lazy" className="w-full" />
-          </div>
-        </Reveal>
       </section>
 
       {/* CTA */}
