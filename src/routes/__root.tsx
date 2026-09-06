@@ -75,11 +75,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pinturas Alcalá · Pintura, alisado y reformas en Madrid" },
-      { name: "description", content: "Pinturas Alcalá: pintura interior y exterior, alisado, tarima y pequeñas reformas en toda la Comunidad de Madrid. Presupuesto sin compromiso. 671 155 809." },
-      { name: "author", content: "Pinturas Alcalá" },
-      { property: "og:title", content: "Pinturas Alcalá · Reformas integrales en Madrid" },
-      { property: "og:description", content: "Albañil de primera, pintor y reformas integrales en toda Madrid." },
+      { title: "Reformas HZ · Reformas, albañilería y pintura en Madrid y Guadalajara" },
+      { name: "description", content: "Reformas HZ: reformas integrales, albañilería, pintura y alisado en Madrid, Guadalajara y zonas cercanas. Presupuesto sin compromiso. 671 155 809." },
+      { name: "author", content: "Reformas HZ" },
+      { property: "og:site_name", content: "Reformas HZ" },
+      { property: "og:title", content: "Reformas HZ · Reformas integrales en Madrid y Guadalajara" },
+      { property: "og:description", content: "Reformas integrales, albañilería y pintura profesional. 25 años de experiencia." },
+
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

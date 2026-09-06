@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MessageCircle, MapPin, PaintRoller, ShieldCheck } from "lucide-react";
+import { Phone, MessageCircle, MapPin, ShieldCheck } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
 const PHONE = "671155809";
@@ -12,14 +12,15 @@ export function Footer() {
       <div className="container-page grid gap-10 py-16 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent text-accent-foreground">
-              <PaintRoller className="h-5 w-5" />
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent font-display text-sm font-extrabold text-accent-foreground">
+              HZ
             </span>
             <span className="leading-tight">
-              <span className="block font-display text-xl font-extrabold uppercase tracking-tight">Pinturas Alcalá</span>
+              <span className="block font-display text-xl font-extrabold uppercase tracking-tight">Reformas HZ</span>
               <span className="block text-[11px] uppercase tracking-widest text-background/60">{t("brand.tagline")}</span>
             </span>
           </div>
+
           <p className="mt-5 max-w-xs text-sm text-background/70">{t("footer.tag")}</p>
           <p className="mt-4 font-display text-lg text-background/90">“{t("brand.motto")}”</p>
         </div>
@@ -58,7 +59,7 @@ export function Footer() {
       </div>
       <div className="border-t border-background/10">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-6 text-xs text-background/60 md:flex-row">
-          <p>© {new Date().getFullYear()} Pinturas Alcalá. {t("footer.rights")}</p>
+          <p>© {new Date().getFullYear()} Reformas HZ. {t("footer.rights")}</p>
           <p>Madrid · España</p>
         </div>
       </div>

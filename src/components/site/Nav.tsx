@@ -1,6 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone, PaintRoller } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
 
@@ -34,19 +34,20 @@ export function Nav() {
       </div>
 
       <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-ember text-accent-foreground shadow-soft">
-            <PaintRoller className="h-5 w-5" />
+        <Link to="/" className="group flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-ember font-display text-sm font-extrabold tracking-tight text-accent-foreground shadow-soft transition-transform duration-300 group-hover:scale-105">
+            HZ
           </span>
           <span className="leading-tight">
             <span className="block font-display text-lg font-extrabold uppercase tracking-tight text-navy">
-              Pinturas <span className="text-accent">Alcalá</span>
+              Reformas <span className="text-accent">HZ</span>
             </span>
             <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">
               {t("brand.tagline")}
             </span>
           </span>
         </Link>
+
 
         <nav className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
