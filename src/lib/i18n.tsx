@@ -129,8 +129,7 @@ const es: Dict = {
 
   "contact.eyebrow": "Contacto",
   "contact.title": "Solicite información o presupuesto.",
-  "contact.subtitle":
-    "Póngase en contacto con Reformas HZ para solicitar un presupuesto adaptado a su proyecto. Atendemos cada solicitud con rapidez y le responderemos a la mayor brevedad posible.",
+  "contact.subtitle": "\n",
   "contact.phone": "Teléfono",
   "contact.whatsapp": "WhatsApp",
   "contact.email": "Correo electrónico",
