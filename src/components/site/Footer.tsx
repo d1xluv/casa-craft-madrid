@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MessageCircle, MapPin } from "lucide-react";
+import { Phone, MessageCircle, MapPin, PaintRoller, ShieldCheck } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
 const PHONE = "671155809";
+const PHONE2 = "671155752";
 
 export function Footer() {
   const { t } = useLang();
@@ -10,17 +11,26 @@ export function Footer() {
     <footer className="mt-24 border-t border-border bg-gradient-ink text-background">
       <div className="container-page grid gap-10 py-16 md:grid-cols-3">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-sm bg-background text-foreground font-display text-base font-bold">R</span>
-            <span className="font-display text-xl">Pinturas Alcalá</span>
+          <div className="flex items-center gap-3">
+            <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent text-accent-foreground">
+              <PaintRoller className="h-5 w-5" />
+            </span>
+            <span className="leading-tight">
+              <span className="block font-display text-xl font-extrabold uppercase tracking-tight">Pinturas Alcalá</span>
+              <span className="block text-[11px] uppercase tracking-widest text-background/60">{t("brand.tagline")}</span>
+            </span>
           </div>
-          <p className="mt-4 max-w-xs text-sm text-background/70">{t("footer.tag")}</p>
+          <p className="mt-5 max-w-xs text-sm text-background/70">{t("footer.tag")}</p>
+          <p className="mt-4 font-display text-lg text-background/90">“{t("brand.motto")}”</p>
         </div>
 
         <div className="space-y-3 text-sm">
           <h3 className="font-display text-base text-background">{t("nav.contact")}</h3>
           <a href={`tel:${PHONE}`} className="flex items-center gap-2 text-background/80 hover:text-accent">
             <Phone className="h-4 w-4" /> 671 155 809
+          </a>
+          <a href={`tel:${PHONE2}`} className="flex items-center gap-2 text-background/80 hover:text-accent">
+            <Phone className="h-4 w-4" /> 671 155 752
           </a>
           <a
             href={`https://wa.me/34${PHONE}`}
@@ -32,6 +42,9 @@ export function Footer() {
           </a>
           <p className="flex items-center gap-2 text-background/80">
             <MapPin className="h-4 w-4" /> {t("contact.area.value")}
+          </p>
+          <p className="flex items-center gap-2 text-background/80">
+            <ShieldCheck className="h-4 w-4" /> {t("brand.years")}
           </p>
         </div>
 
