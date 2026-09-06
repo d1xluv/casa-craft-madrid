@@ -12,7 +12,7 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-sm bg-background text-foreground font-display text-base font-bold">R</span>
-            <span className="font-display text-xl">Reformas Alcalá</span>
+            <span className="font-display text-xl">Pinturas Alcalá</span>
           </div>
           <p className="mt-4 max-w-xs text-sm text-background/70">{t("footer.tag")}</p>
         </div>
@@ -45,7 +45,7 @@ export function Footer() {
       </div>
       <div className="border-t border-background/10">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-6 text-xs text-background/60 md:flex-row">
-          <p>© {new Date().getFullYear()} Reformas Alcalá. {t("footer.rights")}</p>
+          <p>© {new Date().getFullYear()} Pinturas Alcalá. {t("footer.rights")}</p>
           <p>Madrid · España</p>
         </div>
       </div>

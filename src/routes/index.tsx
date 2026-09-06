@@ -10,7 +10,7 @@ export const Route = createFileRoute("/")({
   component: Home,
   head: () => ({
     meta: [
-      { title: "Reformas Alcalá · Reformas integrales en Madrid" },
+      { title: "Pinturas Alcalá · Reformas integrales en Madrid" },
       { name: "description", content: "Albañil de primera, pintor y reformas integrales en toda la Comunidad de Madrid. Llama al 671 155 809." },
     ],
   }),

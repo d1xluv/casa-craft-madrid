@@ -7,7 +7,7 @@ export const Route = createFileRoute("/sobre-mi")({
   component: About,
   head: () => ({
     meta: [
-      { title: "Sobre mí · Reformas Alcalá Madrid" },
+      { title: "Sobre mí · Pinturas Alcalá Madrid" },
       { name: "description", content: "Más de 20 años de oficio. Albañil de primera, pintor y reformista en Madrid." },
     ],
   }),
@@ -45,7 +45,7 @@ function About() {
         </div>
         <div className="md:col-span-5">
           <div className="overflow-hidden rounded-lg">
-            <img src={heroImg} alt="Reformas Alcalá" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <img src={heroImg} alt="Pinturas Alcalá" loading="lazy" className="aspect-[4/5] w-full object-cover" />
           </div>
         </div>
       </section>
