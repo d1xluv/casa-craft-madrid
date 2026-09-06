@@ -99,7 +99,7 @@ function About() {
                 </div>
                 <div>
                   <dt className="text-xs uppercase tracking-wider text-muted-foreground">{t("hero.stat.projects")}</dt>
-                  <dd className="mt-1 font-display text-3xl text-navy">300+</dd>
+                  <dd className="mt-1 font-display text-3xl text-navy">500+</dd>
                 </div>
               </dl>
             </Reveal>
