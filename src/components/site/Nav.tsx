@@ -1,10 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, PaintRoller } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
 
 const PHONE = "671155809";
+const PHONE2 = "671155752";
 
 export function Nav() {
   const { t } = useLang();
@@ -20,22 +21,42 @@ export function Nav() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="container-page flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center rounded-sm bg-foreground text-background font-display text-base font-bold">R</span>
-          <span className="font-display text-lg tracking-tight">
-            Reformas <span className="text-accent">Alcalá</span>
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/90 backdrop-blur-md">
+      <div className="hidden bg-gradient-ink text-background/85 md:block">
+        <div className="container-page flex h-9 items-center justify-between text-xs">
+          <p className="tracking-wide">{t("brand.quote")} · {t("brand.years")}</p>
+          <p className="flex items-center gap-4">
+            <a href={`tel:${PHONE}`} className="hover:text-background">671 155 809</a>
+            <span className="text-background/30">|</span>
+            <a href={`tel:${PHONE2}`} className="hover:text-background">671 155 752</a>
+          </p>
+        </div>
+      </div>
+
+      <div className="container-page flex h-16 items-center justify-between gap-4 md:h-20">
+        <Link to="/" className="flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-ember text-accent-foreground shadow-soft">
+            <PaintRoller className="h-5 w-5" />
+          </span>
+          <span className="leading-tight">
+            <span className="block font-display text-lg font-extrabold uppercase tracking-tight text-navy">
+              Pinturas <span className="text-accent">Alcalá</span>
+            </span>
+            <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">
+              {t("brand.tagline")}
+            </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm transition-colors ${
-                pathname === l.to ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              className={`relative text-sm font-medium transition-colors after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:bg-accent after:transition-all ${
+                pathname === l.to
+                  ? "text-foreground after:w-full"
+                  : "text-muted-foreground after:w-0 hover:text-foreground hover:after:w-full"
               }`}
             >
               {l.label}
@@ -47,7 +68,7 @@ export function Nav() {
           <LanguageToggle />
           <a
             href={`tel:${PHONE}`}
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background transition-transform hover:scale-[1.02]"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-ember px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-soft transition-transform hover:scale-[1.03]"
           >
             <Phone className="h-4 w-4" />
             671 155 809
@@ -55,16 +76,16 @@ export function Nav() {
         </div>
 
         <button
-          className="rounded-md p-2 md:hidden"
+          className="rounded-md p-2 lg:hidden"
           onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
+          aria-label="Menú"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background md:hidden">
+        <div className="border-t border-border bg-background lg:hidden">
           <div className="container-page flex flex-col gap-1 py-4">
             {links.map((l) => (
               <Link
@@ -76,14 +97,16 @@ export function Nav() {
                 {l.label}
               </Link>
             ))}
-            <div className="mt-3 flex items-center justify-between gap-3 px-2">
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-2">
               <LanguageToggle />
-              <a
-                href={`tel:${PHONE}`}
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background"
-              >
-                <Phone className="h-4 w-4" /> 671 155 809
-              </a>
+              <div className="flex gap-2">
+                <a href={`tel:${PHONE}`} className="inline-flex items-center gap-2 rounded-full bg-gradient-ember px-4 py-2 text-sm font-semibold text-accent-foreground">
+                  <Phone className="h-4 w-4" /> 671 155 809
+                </a>
+                <a href={`tel:${PHONE2}`} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold">
+                  671 155 752
+                </a>
+              </div>
             </div>
           </div>
         </div>
