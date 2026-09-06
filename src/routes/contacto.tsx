@@ -1,15 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, ShieldCheck, Send } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/contacto")({
   component: Contact,
   head: () => ({
     meta: [
-      { title: "Contacto · Pinturas Alcalá Madrid" },
-      { name: "description", content: "Contacta con Pinturas Alcalá. Llama al 671 155 809 o escribe por WhatsApp. Toda Madrid." },
+      { title: "Contacto · Reformas HZ Madrid y Guadalajara" },
+      {
+        name: "description",
+        content:
+          "Solicite información o presupuesto sin compromiso a Reformas HZ. Teléfono 671 155 809. Trabajamos en Madrid, Guadalajara y zonas cercanas.",
+      },
+      { property: "og:title", content: "Contacto · Reformas HZ" },
+      {
+        property: "og:description",
+        content: "Solicite un presupuesto adaptado a su proyecto. Madrid, Guadalajara y zonas cercanas.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://casa-craft-madrid.lovable.app/contacto" }],
   }),
 });
 
@@ -30,40 +43,69 @@ function Contact() {
 
   return (
     <section className="container-page py-20 md:py-28">
-      <p className="text-xs uppercase tracking-widest text-accent">{t("contact.eyebrow")}</p>
-      <h1 className="mt-3 max-w-3xl text-balance font-display text-5xl md:text-6xl">{t("contact.title")}</h1>
-      <p className="mt-4 max-w-xl text-muted-foreground">{t("contact.subtitle")}</p>
+      <Reveal>
+        <p className="text-xs font-semibold uppercase tracking-widest text-accent">{t("contact.eyebrow")}</p>
+        <h1 className="mt-3 max-w-3xl text-balance font-display text-5xl uppercase leading-[0.98] text-navy md:text-6xl">
+          {t("contact.title")}
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">{t("contact.subtitle")}</p>
+      </Reveal>
 
-      <div className="mt-14 grid gap-10 md:grid-cols-5">
+      {/* ZONA DE TRABAJO */}
+      <Reveal delay={100}>
+        <div className="mt-10 flex flex-col items-start gap-4 rounded-2xl border border-accent/25 bg-sand/60 p-6 md:flex-row md:items-center md:p-7">
+          <span className="grid h-12 w-12 flex-shrink-0 place-items-center rounded-xl bg-accent text-accent-foreground shadow-soft">
+            <MapPin className="h-6 w-6" />
+          </span>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">{t("contact.area")}</p>
+            <p className="mt-1 font-display text-xl text-navy md:text-2xl">{t("contact.area.long")}</p>
+          </div>
+        </div>
+      </Reveal>
+
+      <div className="mt-12 grid gap-10 md:grid-cols-5">
         <div className="space-y-5 md:col-span-2">
-          <ContactRow icon={Phone} label={t("contact.phone")} value="671 155 809" href="tel:671155809" />
-          <ContactRow icon={MessageCircle} label={t("contact.whatsapp")} value="+34 671 155 809" href="https://wa.me/34671155809" />
-          <ContactRow icon={Mail} label={t("contact.email")} value="info@reformasalcala.es" href="mailto:info@reformasalcala.es" />
-          <ContactRow icon={MapPin} label={t("contact.area")} value={t("contact.area.value")} />
+          {[
+            { icon: Phone, label: t("contact.phone"), value: "671 155 809", href: "tel:671155809" },
+            { icon: Phone, label: t("contact.phone"), value: "671 155 752", href: "tel:671155752" },
+            { icon: MessageCircle, label: t("contact.whatsapp"), value: "+34 671 155 809", href: "https://wa.me/34671155809" },
+            { icon: Mail, label: t("contact.email"), value: "info@reformashz.es", href: "mailto:info@reformashz.es" },
+            { icon: ShieldCheck, label: t("brand.quote"), value: t("brand.years") },
+          ].map((r, i) => (
+            <Reveal key={r.value} delay={i * 70} variant="left">
+              <ContactRow {...r} />
+            </Reveal>
+          ))}
         </div>
 
-        <form onSubmit={onSubmit} className="space-y-4 rounded-lg border border-border bg-card p-6 md:col-span-3 md:p-8">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field name="name" label={t("contact.form.name")} required />
-            <Field name="phone" label={t("contact.form.phone")} type="tel" required />
-          </div>
-          <div>
-            <label className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.form.message")}</label>
-            <textarea
-              name="message"
-              required
-              rows={5}
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-            />
-          </div>
-          <button
-            type="submit"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
+        <Reveal delay={120} className="md:col-span-3">
+          <form
+            onSubmit={onSubmit}
+            className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8"
           >
-            <MessageCircle className="h-4 w-4" /> {t("contact.form.send")}
-          </button>
-          {sent && <p className="text-sm text-accent">{t("contact.form.sent")}</p>}
-        </form>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field name="name" label={t("contact.form.name")} required />
+              <Field name="phone" label={t("contact.form.phone")} type="tel" required />
+            </div>
+            <div>
+              <label className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.form.message")}</label>
+              <textarea
+                name="message"
+                required
+                rows={6}
+                className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm transition-colors duration-300 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+              />
+            </div>
+            <button
+              type="submit"
+              className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
+            >
+              <Send className="h-4 w-4" /> {t("contact.form.send")}
+            </button>
+            {sent && <p className="text-sm text-accent">{t("contact.form.sent")}</p>}
+          </form>
+        </Reveal>
       </div>
     </section>
   );
@@ -81,8 +123,8 @@ function ContactRow({
   href?: string;
 }) {
   const inner = (
-    <div className="flex items-start gap-4 rounded-lg border border-border bg-card p-5 transition-colors hover:border-accent">
-      <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-accent/10 text-accent">
+    <div className="group card-lift flex items-start gap-4 rounded-2xl border border-border bg-card p-5 hover:border-accent/50 hover:shadow-soft">
+      <span className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-accent/10 text-accent transition-colors duration-300 group-hover:bg-accent group-hover:text-accent-foreground">
         <Icon className="h-5 w-5" />
       </span>
       <div>
@@ -91,10 +133,26 @@ function ContactRow({
       </div>
     </div>
   );
-  return href ? <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{inner}</a> : inner;
+  return href ? (
+    <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="block">
+      {inner}
+    </a>
+  ) : (
+    inner
+  );
 }
 
-function Field({ name, label, type = "text", required = false }: { name: string; label: string; type?: string; required?: boolean }) {
+function Field({
+  name,
+  label,
+  type = "text",
+  required,
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+}) {
   return (
     <div>
       <label className="text-xs uppercase tracking-widest text-muted-foreground">{label}</label>
@@ -102,7 +160,7 @@ function Field({ name, label, type = "text", required = false }: { name: string;
         name={name}
         type={type}
         required={required}
-        className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+        className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm transition-colors duration-300 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
       />
     </div>
   );
