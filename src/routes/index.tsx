@@ -239,8 +239,8 @@ function Home() {
                 </a>
               </div>
             </div>
-            <div className="relative mt-10 flex items-center gap-2 text-xs text-background/60">
-              <ShieldCheck className="h-4 w-4 text-accent" /> {t("brand.quote")} · {t("brand.years")}
+            <div className="absolute bottom-5 left-5 flex items-center gap-2 text-[11px] text-background/50">
+              <ShieldCheck className="h-3.5 w-3.5 text-accent/80" /> {t("brand.quote")} · {t("brand.years")}
             </div>
           </div>
         </Reveal>
