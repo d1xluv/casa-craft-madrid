@@ -48,7 +48,7 @@ function Home() {
               {t("hero.eyebrow")}
             </p>
             <h1
-              className="animate-rise mt-6 text-balance font-display text-5xl font-extrabold uppercase leading-[0.95] text-navy md:text-7xl"
+              className="animate-rise mt-6 text-balance font-display text-4xl font-extrabold uppercase leading-[1] text-navy sm:text-5xl md:text-7xl"
               style={{ animationDelay: "90ms" }}
             >
               {t("hero.title")}

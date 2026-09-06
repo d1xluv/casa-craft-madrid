@@ -84,7 +84,7 @@ function About() {
               <p className="text-xs font-semibold uppercase tracking-widest text-accent">{t("about.eyebrow")}</p>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-3 text-balance font-display text-5xl uppercase leading-[0.98] text-navy md:text-6xl">
+              <h1 className="mt-3 text-balance font-display text-4xl uppercase leading-[1.02] text-navy sm:text-5xl md:text-6xl">
                 {t("about.title")}
               </h1>
             </Reveal>
