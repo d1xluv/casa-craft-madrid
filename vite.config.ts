@@ -22,7 +22,6 @@ export default defineConfig(
     : {
         nitro: false,
         tanstackStart: {
-          spa: { enabled: true },
           pages: [
             { path: "/" },
             { path: "/servicios" },
