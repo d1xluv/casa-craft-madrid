@@ -30,13 +30,18 @@ jobs:
       - name: Build application
         run: npm run build
 
+      - name: Add SPA fallback and disable Jekyll
+        run: |
+          cp dist/client/index.html dist/client/404.html
+          touch dist/client/.nojekyll
+
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload dist
+      - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist
+          path: ./dist/client
 
   deploy:
     needs: build

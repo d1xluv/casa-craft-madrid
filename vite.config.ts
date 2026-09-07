@@ -6,10 +6,30 @@
 // You can pass additional config via defineConfig({ vite: { ... } }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
-export default defineConfig({
-  tanstackStart: {
-    server: { entry: "server" },
-  },
-});
+// Inside Lovable we keep the current server-rendered setup (SSR entry in src/server.ts).
+// Outside Lovable (e.g. GitHub Actions) we skip Nitro and prerender the site to static
+// HTML so it can be published on GitHub Pages without any Node server.
+const isLovableSandbox =
+  process.env["LOVABLE_SANDBOX"] === "1" || !!process.env["DEV_SERVER__PROJECT_PATH"];
+
+export default defineConfig(
+  isLovableSandbox
+    ? {
+        tanstackStart: {
+          server: { entry: "server" },
+        },
+      }
+    : {
+        nitro: false,
+        tanstackStart: {
+          pages: [
+            { path: "/" },
+            { path: "/servicios" },
+            { path: "/proyectos" },
+            { path: "/sobre-mi" },
+            { path: "/contacto" },
+          ],
+          prerender: { enabled: true, crawlLinks: true },
+        },
+      },
+);
