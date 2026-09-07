@@ -1,9 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, MessageCircle, MapPin, ShieldCheck } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-
-const PHONE = "671155809";
-const PHONE2 = "671155752";
+import { EMAIL, MAILTO_URL, PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
 
 export function Footer() {
   const { t } = useLang();
@@ -34,12 +32,15 @@ export function Footer() {
             <Phone className="h-4 w-4" /> 671 155 752
           </a>
           <a
-            href={`https://wa.me/34${PHONE}`}
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-2 text-background/80 hover:text-accent"
           >
             <MessageCircle className="h-4 w-4" /> WhatsApp
+          </a>
+          <a href={MAILTO_URL} className="flex items-center gap-2 text-background/80 hover:text-accent">
+            <Mail className="h-4 w-4" /> {EMAIL}
           </a>
           <p className="flex items-center gap-2 text-background/80">
             <MapPin className="h-4 w-4" /> {t("contact.area.value")}

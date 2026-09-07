@@ -167,9 +167,15 @@ const es: Dict = {
   "contact.area.long": "Trabajamos en Madrid, Guadalajara y zonas cercanas de la Comunidad de Madrid.",
   "contact.form.name": "Nombre",
   "contact.form.phone": "Teléfono de contacto",
+  "contact.form.email": "Correo electrónico",
+  "contact.form.type": "Tipo de trabajo",
   "contact.form.message": "Describa brevemente el proyecto",
-  "contact.form.send": "Enviar solicitud",
-  "contact.form.sent": "Gracias por su solicitud. Nos pondremos en contacto con usted a la mayor brevedad.",
+  "contact.form.send": "Enviar solicitud por correo",
+  "contact.form.wa": "Enviar por WhatsApp",
+  "contact.form.sent":
+    "Solicitud enviada correctamente. Nos pondremos en contacto con usted a la mayor brevedad posible.",
+  "contact.form.error":
+    "No se ha podido enviar la solicitud. Puede llamarnos al 671 155 809 o escribirnos por WhatsApp.",
 
   "footer.tag":
     "Reformas integrales · Albañilería · Pintura y alisado · Baños y cocinas · Suelos y fachadas",
@@ -340,9 +346,14 @@ const en: Dict = {
   "contact.area.long": "We work in Madrid, Guadalajara and nearby areas of the Madrid region.",
   "contact.form.name": "Name",
   "contact.form.phone": "Contact phone",
+  "contact.form.email": "Email address",
+  "contact.form.type": "Type of work",
   "contact.form.message": "Briefly describe the project",
-  "contact.form.send": "Send request",
-  "contact.form.sent": "Thank you for your enquiry. We will be in touch as soon as possible.",
+  "contact.form.send": "Send request by email",
+  "contact.form.wa": "Send via WhatsApp",
+  "contact.form.sent": "Request sent successfully. We will get back to you as soon as possible.",
+  "contact.form.error":
+    "The request could not be sent. You can call us on 671 155 809 or message us on WhatsApp.",
 
   "footer.tag": "Full renovations · Bricklaying · Painting & skimming · Bathrooms and kitchens · Floors and façades",
   "footer.rights": "All rights reserved.",
