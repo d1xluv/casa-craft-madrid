@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Hammer, PaintRoller, Wrench, Bath, Layers, Building2, ArrowRight, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-import { PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
+import { PHONE } from "@/lib/contact";
 import { Reveal } from "@/components/site/Reveal";
 
 export const Route = createFileRoute("/servicios")({
