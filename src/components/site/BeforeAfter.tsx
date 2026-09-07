@@ -64,15 +64,17 @@ export function BeforeAfter({ before, after, beforeLabel, afterLabel, alt, class
       />
 
       {/* before (clipped layer) */}
-      <div className="absolute inset-0 overflow-hidden" style={{ width: `${pos}%` }}>
+      <div
+        className="absolute inset-0"
+        style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+      >
         <img
           src={before}
           alt={`${alt} — ${beforeLabel}`}
           loading="lazy"
           decoding="async"
           draggable={false}
-          style={{ width: ref.current ? `${ref.current.clientWidth}px` : "100%" }}
-          className="h-full max-w-none object-cover"
+          className="h-full w-full object-cover"
         />
       </div>
 
