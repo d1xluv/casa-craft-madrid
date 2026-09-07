@@ -30,9 +30,10 @@ jobs:
       - name: Build application
         run: npm run build
         env:
-          # Subdirectory where GitHub Pages serves the site.
-          # Set to "/" when moving to a custom domain (e.g. reformashz.com).
-          VITE_BASE_PATH: /casa-craft-madrid/
+          # Custom domain (reformashz.com) serves from the root.
+          # Use "/casa-craft-madrid/" only if publishing to the project URL
+          # https://d1xluv.github.io/casa-craft-madrid/ instead.
+          VITE_BASE_PATH: /
 
       - name: Add SPA fallback and disable Jekyll
         run: |
