@@ -3,9 +3,9 @@ import { ArrowRight, Phone, MapPin, ShieldCheck, Hammer, PaintRoller, Wrench, Cl
 import { useLang } from "@/lib/i18n";
 import { TEL_URL, TEL2_URL, WHATSAPP_URL } from "@/lib/contact";
 import heroImg from "@/assets/hero-bricklayer.jpg";
-import projFloors from "@/assets/suelos_despues_1.webp.asset.json";
-import projWall from "@/assets/muro_y_valla_despues.webp.asset.json";
-import projKitchenReal from "@/assets/cocinas_1.webp.asset.json";
+import projFloors from "@/assets/suelos_despues_1.webp";
+import projWall from "@/assets/muro_y_valla_despues.webp";
+import projKitchenReal from "@/assets/cocinas_1.webp";
 import { WorkCard } from "@/components/site/WorkCard";
 import { Reveal, useParallax } from "@/components/site/Reveal";
 
@@ -32,9 +32,9 @@ function Home() {
 
 
   const works = [
-    { img: projFloors.url, tag: t("work.floors.type"), title: t("work.floors.title"), desc: t("work.floors.desc"), className: "md:col-span-4 md:row-span-2", ratio: "aspect-[16/11]" },
-    { img: projKitchenReal.url, tag: t("work.kitchen.type"), title: t("work.kitchen.title"), desc: t("work.kitchen.desc"), className: "md:col-span-2", ratio: "aspect-square" },
-    { img: projWall.url, tag: t("work.wall.type"), title: t("work.wall.title"), desc: t("work.wall.desc"), className: "md:col-span-2", ratio: "aspect-square" },
+    { img: projFloors, tag: t("work.floors.type"), title: t("work.floors.title"), desc: t("work.floors.desc"), className: "md:col-span-4 md:row-span-2", ratio: "aspect-[16/11]" },
+    { img: projKitchenReal, tag: t("work.kitchen.type"), title: t("work.kitchen.title"), desc: t("work.kitchen.desc"), className: "md:col-span-2", ratio: "aspect-square" },
+    { img: projWall, tag: t("work.wall.type"), title: t("work.wall.title"), desc: t("work.wall.desc"), className: "md:col-span-2", ratio: "aspect-square" },
   ];
 
   return (
