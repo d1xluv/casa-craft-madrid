@@ -12,6 +12,11 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const isLovableSandbox =
   process.env["LOVABLE_SANDBOX"] === "1" || !!process.env["DEV_SERVER__PROJECT_PATH"];
 
+// Where the site is served from. Defaults to "/" (Lovable, local dev, custom domain).
+// GitHub Pages sets VITE_BASE_PATH=/casa-craft-madrid/ in the workflow.
+const rawBase = process.env["VITE_BASE_PATH"] ?? "/";
+const base = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
+
 export default defineConfig(
   isLovableSandbox
     ? {
@@ -21,6 +26,7 @@ export default defineConfig(
       }
     : {
         nitro: false,
+        vite: { base },
         tanstackStart: {
           pages: [
             { path: "/" },

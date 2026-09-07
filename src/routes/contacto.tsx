@@ -9,9 +9,7 @@ import {
   FORMSPREE_ENDPOINT,
   MAILTO_URL,
   TEL_URL,
-  TEL2_URL,
   PHONE_DISPLAY,
-  PHONE2_DISPLAY,
   WHATSAPP_URL,
   whatsappUrl,
 } from "@/lib/contact";
@@ -34,7 +32,6 @@ export const Route = createFileRoute("/contacto")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://casa-craft-madrid.lovable.app/contacto" }],
   }),
 });
 
@@ -117,7 +114,6 @@ function Contact() {
         <div className="space-y-5 md:col-span-2">
           {[
             { icon: Phone, label: t("contact.phone"), value: PHONE_DISPLAY, href: TEL_URL },
-            { icon: Phone, label: t("contact.phone"), value: PHONE2_DISPLAY, href: TEL2_URL },
             { icon: MessageCircle, label: t("contact.whatsapp"), value: `+34 ${PHONE_DISPLAY}`, href: WHATSAPP_URL },
             { icon: Mail, label: t("contact.email"), value: EMAIL, href: MAILTO_URL },
             { icon: ShieldCheck, label: t("brand.quote"), value: t("brand.years") },

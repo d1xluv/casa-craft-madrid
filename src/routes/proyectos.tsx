@@ -4,15 +4,15 @@ import { CheckCircle2, MoveHorizontal } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/site/Reveal";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
-import suelosAntes from "@/assets/suelos_antes.webp.asset.json";
-import suelosDespues1 from "@/assets/suelos_despues_1.webp.asset.json";
-import suelosDespues2 from "@/assets/suelos_despues_2.webp.asset.json";
-import muroAntes from "@/assets/muro_y_valla_antes.webp.asset.json";
-import muroDespues from "@/assets/muro_y_valla_despues.webp.asset.json";
-import pinturaAntes from "@/assets/pintura_antes.webp.asset.json";
-import pinturaDespues from "@/assets/pintura_despues.png.asset.json";
-import cocina1 from "@/assets/cocinas_1.webp.asset.json";
-import cocina2 from "@/assets/cocinas_2.webp.asset.json";
+import suelosAntes from "@/assets/suelos_antes.webp";
+import suelosDespues1 from "@/assets/suelos_despues_1.webp";
+import suelosDespues2 from "@/assets/suelos_despues_2.webp";
+import muroAntes from "@/assets/muro_y_valla_antes.webp";
+import muroDespues from "@/assets/muro_y_valla_despues.webp";
+import pinturaAntes from "@/assets/pintura_antes.webp";
+import pinturaDespues from "@/assets/pintura_despues.png";
+import cocina1 from "@/assets/cocinas_1.webp";
+import cocina2 from "@/assets/cocinas_2.webp";
 
 export const Route = createFileRoute("/proyectos")({
   component: Projects,
@@ -31,10 +31,7 @@ export const Route = createFileRoute("/proyectos")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: muroDespues.url },
-      { name: "twitter:image", content: muroDespues.url },
     ],
-    links: [{ rel: "canonical", href: "https://casa-craft-madrid.lovable.app/proyectos" }],
   }),
 });
 
@@ -138,8 +135,8 @@ function Projects() {
       type: t("work.floors.type"),
       desc: t("work.floors.desc"),
       result: t("work.floors.result"),
-      before: suelosAntes.url,
-      afters: [suelosDespues1.url, suelosDespues2.url],
+      before: suelosAntes,
+      afters: [suelosDespues1, suelosDespues2],
     },
     {
       id: "wall",
@@ -147,8 +144,8 @@ function Projects() {
       type: t("work.wall.type"),
       desc: t("work.wall.desc"),
       result: t("work.wall.result"),
-      before: muroAntes.url,
-      afters: [muroDespues.url],
+      before: muroAntes,
+      afters: [muroDespues],
     },
     {
       id: "paint",
@@ -156,8 +153,8 @@ function Projects() {
       type: t("work.paint.type"),
       desc: t("work.paint.desc"),
       result: t("work.paint.result"),
-      before: pinturaAntes.url,
-      afters: [pinturaDespues.url],
+      before: pinturaAntes,
+      afters: [pinturaDespues],
     },
     {
       id: "kitchen",
@@ -165,8 +162,8 @@ function Projects() {
       type: t("work.kitchen.type"),
       desc: t("work.kitchen.desc"),
       result: t("work.kitchen.result"),
-      before: cocina1.url,
-      afters: [cocina2.url],
+      before: cocina1,
+      afters: [cocina2],
       beforeLabel: t("work.kitchen.view1"),
       afterLabel: t("work.kitchen.view2"),
     },

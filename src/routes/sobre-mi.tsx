@@ -38,7 +38,6 @@ export const Route = createFileRoute("/sobre-mi")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://casa-craft-madrid.lovable.app/sobre-mi" }],
   }),
 });
 
