@@ -3,11 +3,13 @@ import { ArrowRight, Phone, MapPin, ShieldCheck, Hammer, PaintRoller, Wrench, Cl
 import { useLang } from "@/lib/i18n";
 import { TEL_URL, WHATSAPP_URL } from "@/lib/contact";
 import heroImg from "@/assets/hero-bricklayer.jpg";
-import projFloors from "@/assets/suelos_despues_1.webp";
-import projWall from "@/assets/muro_y_valla_despues.webp";
-import projKitchenReal from "@/assets/cocinas_1.webp";
 import { WorkCard } from "@/components/site/WorkCard";
 import { Reveal, useParallax } from "@/components/site/Reveal";
+
+const publicAsset = (filename: string) => `${import.meta.env.BASE_URL}assets/${filename}`;
+const projFloors = publicAsset("suelos_despues_1.webp");
+const projWall = publicAsset("muro_y_valla_despues.webp");
+const projKitchenReal = publicAsset("cocinas_1.webp");
 
 
 export const Route = createFileRoute("/")({

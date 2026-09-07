@@ -4,15 +4,18 @@ import { CheckCircle2, MoveHorizontal } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/site/Reveal";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
-import suelosAntes from "@/assets/suelos_antes.webp";
-import suelosDespues1 from "@/assets/suelos_despues_1.webp";
-import suelosDespues2 from "@/assets/suelos_despues_2.webp";
-import muroAntes from "@/assets/muro_y_valla_antes.webp";
-import muroDespues from "@/assets/muro_y_valla_despues.webp";
-import pinturaAntes from "@/assets/pintura_antes.webp";
-import pinturaDespues from "@/assets/pintura_despues.png";
-import cocina1 from "@/assets/cocinas_1.webp";
-import cocina2 from "@/assets/cocinas_2.webp";
+
+const assetUrl = (filename: string) => `${import.meta.env.BASE_URL}assets/${filename}`;
+
+const suelosAntes = assetUrl("suelos_antes.webp");
+const suelosDespues1 = assetUrl("suelos_despues_1.webp");
+const suelosDespues2 = assetUrl("suelos_despues_2.webp");
+const muroAntes = assetUrl("muro_y_valla_antes.webp");
+const muroDespues = assetUrl("muro_y_valla_despues.webp");
+const pinturaAntes = assetUrl("pintura_antes.webp");
+const pinturaDespues = assetUrl("pintura_despues.png");
+const cocina1 = assetUrl("cocinas_1.webp");
+const cocina2 = assetUrl("cocinas_2.webp");
 
 export const Route = createFileRoute("/proyectos")({
   component: Projects,
