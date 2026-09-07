@@ -66,6 +66,35 @@ const es: Dict = {
   "projects.d.reform":
     "Obra en curso: derribo, nuevas instalaciones y preparación de paramentos. Seguimiento fotográfico para el cliente y retirada de escombros incluida.",
 
+  "work.before": "Antes",
+  "work.after": "Después",
+  "work.drag": "Arrastre el control para comparar el antes y el después",
+  "work.result": "Resultado",
+  "work.views": "Vistas del resultado",
+  "work.floors.title": "Renovación de suelos",
+  "work.floors.type": "Pavimentos y revestimientos",
+  "work.floors.desc":
+    "Renovación y sustitución de pavimentos, adaptándonos a las necesidades de cada espacio. Este proyecto muestra un acabado en madera, aunque también trabajamos con suelos cerámicos y diferentes soluciones de pavimentación.",
+  "work.floors.result": "Superficie preparada y pavimento nuevo instalado, con un acabado uniforme y remates limpios en todo el perímetro.",
+  "work.wall.title": "Muro y valla perimetral",
+  "work.wall.type": "Albañilería y cerramientos",
+  "work.wall.desc":
+    "Ejecución de muro con acabado en piedra y cerramiento perimetral de la parcela, incluyendo pilares, hueco de acceso y armario para instalaciones.",
+  "work.wall.result": "Parcela cerrada y delimitada, con un muro a plomo, juntas cuidadas y un acabado exterior resistente y homogéneo.",
+  "work.paint.title": "Pintura y acabado de superficies",
+  "work.paint.type": "Pintura interior",
+  "work.paint.desc":
+    "Preparación de paredes y techos, corrección de imperfecciones y aplicación de pintura para renovar por completo el aspecto de la vivienda.",
+  "work.paint.result": "Paredes lisas y uniformes, techos renovados y una estancia mucho más luminosa, entregada limpia y lista para su uso.",
+  "work.kitchen.view1": "Cocina 1",
+  "work.kitchen.view2": "Cocina 2",
+  "work.kitchen.title": "Reforma de cocina",
+  "work.kitchen.type": "Cocinas",
+  "work.kitchen.desc":
+    "Reforma integral de cocina: mobiliario, encimera, frente, iluminación y colocación de electrodomésticos, aprovechando al máximo el espacio disponible.",
+  "work.kitchen.result": "Cocina totalmente equipada y funcional, con acabados actuales y una distribución pensada para el uso diario.",
+
+
   "brand.name": "Reformas HZ",
   "brand.tagline": "Reformas, albañilería y pintura",
   "brand.motto": "Su hogar, en buenas manos",
@@ -208,6 +237,35 @@ const en: Dict = {
     "Exposed brick wall with recessed joints, built true to plumb with clean pointing. Bricklaying finished to be seen, not hidden.",
   "projects.d.reform":
     "Work in progress: strip-out, new services and wall preparation. Photographic updates for the client and debris removal included.",
+
+  "work.before": "Before",
+  "work.after": "After",
+  "work.drag": "Drag the handle to compare before and after",
+  "work.result": "Result",
+  "work.views": "Views of the result",
+  "work.floors.title": "Floor renovation",
+  "work.floors.type": "Flooring & surfaces",
+  "work.floors.desc":
+    "Renovation and replacement of flooring, adapted to the needs of each space. This project shows a wood finish, although we also work with ceramic floors and other flooring solutions.",
+  "work.floors.result": "Subfloor prepared and new flooring installed, with an even finish and clean edges throughout.",
+  "work.wall.title": "Boundary wall & fencing",
+  "work.wall.type": "Bricklaying & enclosures",
+  "work.wall.desc":
+    "Construction of a stone-finished wall and perimeter fencing for the plot, including pillars, access opening and a cabinet for services.",
+  "work.wall.result": "Plot fully enclosed and defined, with a wall built true to plumb, careful jointing and a durable exterior finish.",
+  "work.paint.title": "Painting & surface finishing",
+  "work.paint.type": "Interior painting",
+  "work.paint.desc":
+    "Preparation of walls and ceilings, correction of imperfections and repainting to completely renew the look of the home.",
+  "work.paint.result": "Smooth, even walls, refreshed ceilings and a much brighter room, handed over clean and ready to use.",
+  "work.kitchen.view1": "Kitchen 1",
+  "work.kitchen.view2": "Kitchen 2",
+  "work.kitchen.title": "Kitchen renovation",
+  "work.kitchen.type": "Kitchens",
+  "work.kitchen.desc":
+    "Full kitchen renovation: units, worktop, splashback, lighting and appliance installation, making the most of the available space.",
+  "work.kitchen.result": "A fully equipped, functional kitchen with contemporary finishes and a layout designed for everyday use.",
+
 
   "brand.name": "Reformas HZ",
   "brand.tagline": "Renovations, bricklaying & painting",

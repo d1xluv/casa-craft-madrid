@@ -2,9 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, MapPin, ShieldCheck, Hammer, PaintRoller, Wrench, Clock, Sparkles, Layers } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import heroImg from "@/assets/hero-bricklayer.jpg";
-import projApartment from "@/assets/project-apartment.jpg";
-import projBath from "@/assets/project-bathroom.jpg";
-import projKitchen from "@/assets/project-kitchen.jpg";
+import projFloors from "@/assets/suelos_despues_1.webp.asset.json";
+import projWall from "@/assets/muro_y_valla_despues.webp.asset.json";
+import projKitchenReal from "@/assets/cocinas_1.webp.asset.json";
 import { WorkCard } from "@/components/site/WorkCard";
 import { Reveal, useParallax } from "@/components/site/Reveal";
 
@@ -31,9 +31,9 @@ function Home() {
 
 
   const works = [
-    { img: projApartment, tag: t("projects.tag.apartment"), title: "Reforma integral · Chamberí", desc: t("projects.d.apartment"), className: "md:col-span-4 md:row-span-2", ratio: "aspect-[16/11]" },
-    { img: projKitchen, tag: t("projects.tag.kitchen"), title: "Cocina abierta · Retiro", desc: t("projects.d.kitchen"), className: "md:col-span-2", ratio: "aspect-square" },
-    { img: projBath, tag: t("projects.tag.bath"), title: "Baño completo · Salamanca", desc: t("projects.d.bath"), className: "md:col-span-2", ratio: "aspect-square" },
+    { img: projFloors.url, tag: t("work.floors.type"), title: t("work.floors.title"), desc: t("work.floors.desc"), className: "md:col-span-4 md:row-span-2", ratio: "aspect-[16/11]" },
+    { img: projKitchenReal.url, tag: t("work.kitchen.type"), title: t("work.kitchen.title"), desc: t("work.kitchen.desc"), className: "md:col-span-2", ratio: "aspect-square" },
+    { img: projWall.url, tag: t("work.wall.type"), title: t("work.wall.title"), desc: t("work.wall.desc"), className: "md:col-span-2", ratio: "aspect-square" },
   ];
 
   return (
