@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
-import { PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
+import { TEL_URL, TEL2_URL, WHATSAPP_URL } from "@/lib/contact";
 
 export function Nav() {
   const { t } = useLang();

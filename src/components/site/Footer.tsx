@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, MessageCircle, Mail, MapPin, ShieldCheck } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-import { EMAIL, MAILTO_URL, PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
+import { EMAIL, MAILTO_URL, TEL_URL, TEL2_URL, WHATSAPP_URL } from "@/lib/contact";
 
 export function Footer() {
   const { t } = useLang();

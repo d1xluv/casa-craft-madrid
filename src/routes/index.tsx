@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Phone, MapPin, ShieldCheck, Hammer, PaintRoller, Wrench, Clock, Sparkles, Layers } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-import { PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
+import { TEL_URL, TEL2_URL, WHATSAPP_URL } from "@/lib/contact";
 import heroImg from "@/assets/hero-bricklayer.jpg";
 import projFloors from "@/assets/suelos_despues_1.webp.asset.json";
 import projWall from "@/assets/muro_y_valla_despues.webp.asset.json";
