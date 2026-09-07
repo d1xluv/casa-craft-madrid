@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
-import { TEL_URL, TEL2_URL, WHATSAPP_URL } from "@/lib/contact";
+import { TEL_URL, WHATSAPP_URL } from "@/lib/contact";
 
 export function Nav() {
   const { t } = useLang();
@@ -25,8 +25,6 @@ export function Nav() {
           <p className="tracking-wide">{t("brand.quote")} · {t("brand.years")}</p>
           <p className="flex items-center gap-4">
             <a href={TEL_URL} className="hover:text-background">671 155 809</a>
-            <span className="text-background/30">|</span>
-            <a href={TEL2_URL} className="hover:text-background">671 155 752</a>
           </p>
         </div>
       </div>
@@ -101,9 +99,6 @@ export function Nav() {
               <div className="flex gap-2">
                 <a href={TEL_URL} className="inline-flex items-center gap-2 rounded-full bg-gradient-ember px-4 py-2 text-sm font-semibold text-accent-foreground">
                   <Phone className="h-4 w-4" /> 671 155 809
-                </a>
-                <a href={TEL2_URL} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold">
-                  671 155 752
                 </a>
                 <a
                   href={WHATSAPP_URL}
