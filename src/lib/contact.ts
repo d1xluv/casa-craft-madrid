@@ -3,8 +3,10 @@ export const PHONE2 = "671155752";
 export const PHONE_DISPLAY = "671 155 809";
 export const PHONE2_DISPLAY = "671 155 752";
 
-export const EMAIL = "reformashz@gmail.com";
+export const EMAIL = "reformashzcorreo@gmail.com";
 export const EMAIL_SUBJECT = "Solicitud de presupuesto - Reformas HZ";
+
+export const FORMSPREE_ENDPOINT = "https://formspree.io/f/xyeynkrw";
 
 const WHATSAPP_TEXT = "Hola, me gustaría solicitar información sobre un trabajo de reforma.";
 

@@ -6,13 +6,13 @@ import { Reveal } from "@/components/site/Reveal";
 import {
   EMAIL,
   EMAIL_SUBJECT,
+  FORMSPREE_ENDPOINT,
   MAILTO_URL,
   PHONE,
   PHONE2,
   PHONE_DISPLAY,
   PHONE2_DISPLAY,
   WHATSAPP_URL,
-  mailtoUrl,
   whatsappUrl,
 } from "@/lib/contact";
 
@@ -42,28 +42,44 @@ function Contact() {
   const { t } = useLang();
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const buildBody = (f: FormData) =>
     [
       "Nueva solicitud de presupuesto - Reformas HZ",
       "",
       `Nombre: ${f.get("name") ?? ""}`,
-      `Email: ${f.get("email") ?? ""}`,
       `Teléfono: ${f.get("phone") ?? ""}`,
-      `Tipo de trabajo: ${f.get("worktype") ?? ""}`,
+      `Email: ${f.get("email") ?? ""}`,
+      `Tipo de trabajo: ${f.get("work_type") ?? ""}`,
       "",
-      `Mensaje: ${f.get("message") ?? ""}`,
+      "Descripción:",
+      `${f.get("message") ?? ""}`,
     ].join("\n");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const f = new FormData(form);
+    f.append("_subject", EMAIL_SUBJECT);
+    setSending(true);
+    setError(false);
+    setSent(false);
     try {
-      const f = new FormData(e.currentTarget);
-      window.location.href = mailtoUrl(EMAIL_SUBJECT, buildBody(f));
-      setError(false);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: f,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error("formspree");
       setSent(true);
+      form.reset();
     } catch {
       setError(true);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -72,8 +88,6 @@ function Contact() {
     if (!form) return;
     const f = new FormData(form);
     window.open(whatsappUrl(buildBody(f)), "_blank", "noopener");
-    setError(false);
-    setSent(true);
   };
 
   return (
@@ -123,7 +137,7 @@ function Contact() {
               <Field name="name" label={t("contact.form.name")} required />
               <Field name="phone" label={t("contact.form.phone")} type="tel" required />
               <Field name="email" label={t("contact.form.email")} type="email" required />
-              <Field name="worktype" label={t("contact.form.type")} />
+              <Field name="work_type" label={t("contact.form.type")} required />
             </div>
             <div>
               <label className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.form.message")}</label>
@@ -137,9 +151,10 @@ function Contact() {
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
-                className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
+                disabled={sending}
+                className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember disabled:cursor-not-allowed disabled:opacity-70"
               >
-                <Send className="h-4 w-4" /> {t("contact.form.send")}
+                <Send className="h-4 w-4" /> {sending ? t("contact.form.sending") : t("contact.form.send")}
               </button>
               <button
                 type="button"
