@@ -3,6 +3,18 @@ import { useState } from "react";
 import { Phone, MessageCircle, Mail, MapPin, ShieldCheck, Send } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { Reveal } from "@/components/site/Reveal";
+import {
+  EMAIL,
+  EMAIL_SUBJECT,
+  MAILTO_URL,
+  PHONE,
+  PHONE2,
+  PHONE_DISPLAY,
+  PHONE2_DISPLAY,
+  WHATSAPP_URL,
+  mailtoUrl,
+  whatsappUrl,
+} from "@/lib/contact";
 
 export const Route = createFileRoute("/contacto")({
   component: Contact,
@@ -29,15 +41,38 @@ export const Route = createFileRoute("/contacto")({
 function Contact() {
   const { t } = useLang();
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
+
+  const buildBody = (f: FormData) =>
+    [
+      "Nueva solicitud de presupuesto - Reformas HZ",
+      "",
+      `Nombre: ${f.get("name") ?? ""}`,
+      `Email: ${f.get("email") ?? ""}`,
+      `Teléfono: ${f.get("phone") ?? ""}`,
+      `Tipo de trabajo: ${f.get("worktype") ?? ""}`,
+      "",
+      `Mensaje: ${f.get("message") ?? ""}`,
+    ].join("\n");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
-    const name = f.get("name");
-    const phone = f.get("phone");
-    const message = f.get("message");
-    const body = encodeURIComponent(`Nombre: ${name}\nTeléfono: ${phone}\n\n${message}`);
-    window.location.href = `https://wa.me/34671155809?text=${body}`;
+    try {
+      const f = new FormData(e.currentTarget);
+      window.location.href = mailtoUrl(EMAIL_SUBJECT, buildBody(f));
+      setError(false);
+      setSent(true);
+    } catch {
+      setError(true);
+    }
+  };
+
+  const onWhatsApp = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const form = e.currentTarget.form;
+    if (!form) return;
+    const f = new FormData(form);
+    window.open(whatsappUrl(buildBody(f)), "_blank", "noopener");
+    setError(false);
     setSent(true);
   };
 
