@@ -42,28 +42,44 @@ function Contact() {
   const { t } = useLang();
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const buildBody = (f: FormData) =>
     [
       "Nueva solicitud de presupuesto - Reformas HZ",
       "",
       `Nombre: ${f.get("name") ?? ""}`,
-      `Email: ${f.get("email") ?? ""}`,
       `Teléfono: ${f.get("phone") ?? ""}`,
-      `Tipo de trabajo: ${f.get("worktype") ?? ""}`,
+      `Email: ${f.get("email") ?? ""}`,
+      `Tipo de trabajo: ${f.get("work_type") ?? ""}`,
       "",
-      `Mensaje: ${f.get("message") ?? ""}`,
+      "Descripción:",
+      `${f.get("message") ?? ""}`,
     ].join("\n");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
+    if (!form.reportValidity()) return;
+
+    const f = new FormData(form);
+    f.append("_subject", EMAIL_SUBJECT);
+    setSending(true);
+    setError(false);
+    setSent(false);
     try {
-      const f = new FormData(e.currentTarget);
-      window.location.href = mailtoUrl(EMAIL_SUBJECT, buildBody(f));
-      setError(false);
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: f,
+        headers: { Accept: "application/json" },
+      });
+      if (!res.ok) throw new Error("formspree");
       setSent(true);
+      form.reset();
     } catch {
       setError(true);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -72,8 +88,6 @@ function Contact() {
     if (!form) return;
     const f = new FormData(form);
     window.open(whatsappUrl(buildBody(f)), "_blank", "noopener");
-    setError(false);
-    setSent(true);
   };
 
   return (
