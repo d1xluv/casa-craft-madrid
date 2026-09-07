@@ -20,6 +20,7 @@ const base = rawBase.endsWith("/") ? rawBase : `${rawBase}/`;
 export default defineConfig(
   isLovableSandbox
     ? {
+        vite: { base },
         tanstackStart: {
           server: { entry: "server" },
         },
@@ -35,7 +36,7 @@ export default defineConfig(
             { path: "/sobre-mi" },
             { path: "/contacto" },
           ],
-          prerender: { enabled: true, crawlLinks: true },
+          prerender: { enabled: true, autoStaticPathsDiscovery: false },
         },
       },
 );
