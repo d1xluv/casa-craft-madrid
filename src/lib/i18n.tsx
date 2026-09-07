@@ -171,11 +171,12 @@ const es: Dict = {
   "contact.form.type": "Tipo de trabajo",
   "contact.form.message": "Describa brevemente el proyecto",
   "contact.form.send": "Enviar solicitud por correo",
+  "contact.form.sending": "Enviando solicitud...",
   "contact.form.wa": "Enviar por WhatsApp",
   "contact.form.sent":
     "Solicitud enviada correctamente. Nos pondremos en contacto con usted a la mayor brevedad posible.",
   "contact.form.error":
-    "No se ha podido enviar la solicitud. Puede llamarnos al 671 155 809 o escribirnos por WhatsApp.",
+    "No ha sido posible enviar la solicitud. Por favor, inténtelo de nuevo o contacte directamente con nosotros por WhatsApp.",
 
   "footer.tag":
     "Reformas integrales · Albañilería · Pintura y alisado · Baños y cocinas · Suelos y fachadas",
@@ -350,10 +351,11 @@ const en: Dict = {
   "contact.form.type": "Type of work",
   "contact.form.message": "Briefly describe the project",
   "contact.form.send": "Send request by email",
+  "contact.form.sending": "Sending request...",
   "contact.form.wa": "Send via WhatsApp",
   "contact.form.sent": "Request sent successfully. We will get back to you as soon as possible.",
   "contact.form.error":
-    "The request could not be sent. You can call us on 671 155 809 or message us on WhatsApp.",
+    "The request could not be sent. Please try again or contact us directly on WhatsApp.",
 
   "footer.tag": "Full renovations · Bricklaying · Painting & skimming · Bathrooms and kitchens · Floors and façades",
   "footer.rights": "All rights reserved.",
