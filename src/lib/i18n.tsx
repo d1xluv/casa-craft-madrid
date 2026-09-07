@@ -86,6 +86,8 @@ const es: Dict = {
   "work.paint.desc":
     "Preparación de paredes y techos, corrección de imperfecciones y aplicación de pintura para renovar por completo el aspecto de la vivienda.",
   "work.paint.result": "Paredes lisas y uniformes, techos renovados y una estancia mucho más luminosa, entregada limpia y lista para su uso.",
+  "work.kitchen.view1": "Cocina 1",
+  "work.kitchen.view2": "Cocina 2",
   "work.kitchen.title": "Reforma de cocina",
   "work.kitchen.type": "Cocinas",
   "work.kitchen.desc":
@@ -256,6 +258,8 @@ const en: Dict = {
   "work.paint.desc":
     "Preparation of walls and ceilings, correction of imperfections and repainting to completely renew the look of the home.",
   "work.paint.result": "Smooth, even walls, refreshed ceilings and a much brighter room, handed over clean and ready to use.",
+  "work.kitchen.view1": "Kitchen 1",
+  "work.kitchen.view2": "Kitchen 2",
   "work.kitchen.title": "Kitchen renovation",
   "work.kitchen.type": "Kitchens",
   "work.kitchen.desc":

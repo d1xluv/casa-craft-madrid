@@ -46,6 +46,8 @@ type Project = {
   result: string;
   before: string;
   afters: string[];
+  beforeLabel?: string;
+  afterLabel?: string;
 };
 
 function ProjectBlock({ p, index }: { p: Project; index: number }) {
@@ -62,8 +64,8 @@ function ProjectBlock({ p, index }: { p: Project; index: number }) {
         <BeforeAfter
           before={p.before}
           after={p.afters[active]}
-          beforeLabel={t("work.before")}
-          afterLabel={t("work.after")}
+          beforeLabel={p.beforeLabel ?? t("work.before")}
+          afterLabel={p.afterLabel ?? t("work.after")}
           alt={p.title}
         />
 
@@ -165,6 +167,8 @@ function Projects() {
       result: t("work.kitchen.result"),
       before: cocina1.url,
       afters: [cocina2.url],
+      beforeLabel: t("work.kitchen.view1"),
+      afterLabel: t("work.kitchen.view2"),
     },
   ];
 
