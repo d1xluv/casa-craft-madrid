@@ -6,13 +6,13 @@ import { Reveal } from "@/components/site/Reveal";
 import {
   EMAIL,
   EMAIL_SUBJECT,
+  FORMSPREE_ENDPOINT,
   MAILTO_URL,
   PHONE,
   PHONE2,
   PHONE_DISPLAY,
   PHONE2_DISPLAY,
   WHATSAPP_URL,
-  mailtoUrl,
   whatsappUrl,
 } from "@/lib/contact";
 
