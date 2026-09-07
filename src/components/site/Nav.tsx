@@ -3,9 +3,7 @@ import { useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
-
-const PHONE = "671155809";
-const PHONE2 = "671155752";
+import { PHONE, PHONE2, WHATSAPP_URL } from "@/lib/contact";
 
 export function Nav() {
   const { t } = useLang();
@@ -106,6 +104,14 @@ export function Nav() {
                 </a>
                 <a href={`tel:${PHONE2}`} className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold">
                   671 155 752
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-semibold"
+                >
+                  WhatsApp
                 </a>
               </div>
             </div>
