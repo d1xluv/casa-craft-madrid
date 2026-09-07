@@ -25,10 +25,10 @@ export function Footer() {
 
         <div className="space-y-3 text-sm">
           <h3 className="font-display text-base text-background">{t("nav.contact")}</h3>
-          <a href={`tel:${PHONE}`} className="flex items-center gap-2 text-background/80 hover:text-accent">
+          <a href={TEL_URL} className="flex items-center gap-2 text-background/80 hover:text-accent">
             <Phone className="h-4 w-4" /> 671 155 809
           </a>
-          <a href={`tel:${PHONE2}`} className="flex items-center gap-2 text-background/80 hover:text-accent">
+          <a href={TEL2_URL} className="flex items-center gap-2 text-background/80 hover:text-accent">
             <Phone className="h-4 w-4" /> 671 155 752
           </a>
           <a

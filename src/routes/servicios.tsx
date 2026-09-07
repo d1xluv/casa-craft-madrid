@@ -70,7 +70,7 @@ function Services() {
           </div>
           <div className="flex flex-wrap gap-3">
             <a
-              href={`tel:${PHONE}`}
+              href={TEL_URL}
               className="btn-motion inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
             >
               <Phone className="h-4 w-4" /> 671 155 809

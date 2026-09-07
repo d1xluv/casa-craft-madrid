@@ -60,7 +60,7 @@ function Home() {
 
             <div className="animate-rise mt-10 flex flex-wrap gap-3" style={{ animationDelay: "260ms" }}>
               <a
-                href={`tel:${PHONE}`}
+                href={TEL_URL}
                 className="btn-motion group inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-ember"
               >
                 <Phone className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
@@ -219,13 +219,13 @@ function Home() {
               </div>
               <div className="flex flex-wrap gap-3 md:justify-end">
                 <a
-                  href={`tel:${PHONE}`}
+                  href={TEL_URL}
                   className="btn-motion inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground"
                 >
                   <Phone className="h-4 w-4" /> 671 155 809
                 </a>
                 <a
-                  href={`tel:${PHONE2}`}
+                  href={TEL2_URL}
                   className="btn-motion inline-flex items-center gap-2 rounded-full border border-background/30 px-6 py-3 text-sm font-semibold text-background hover:bg-background/10"
                 >
                   <Phone className="h-4 w-4" /> 671 155 752

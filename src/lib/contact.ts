@@ -21,3 +21,6 @@ export function whatsappUrl(text: string) {
 export function mailtoUrl(subject: string, body: string) {
   return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+export const TEL_URL = `tel:+34${PHONE}`;
+export const TEL2_URL = `tel:+34${PHONE2}`;
