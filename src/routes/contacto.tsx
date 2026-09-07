@@ -137,7 +137,7 @@ function Contact() {
               <Field name="name" label={t("contact.form.name")} required />
               <Field name="phone" label={t("contact.form.phone")} type="tel" required />
               <Field name="email" label={t("contact.form.email")} type="email" required />
-              <Field name="worktype" label={t("contact.form.type")} />
+              <Field name="work_type" label={t("contact.form.type")} required />
             </div>
             <div>
               <label className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.form.message")}</label>
@@ -151,9 +151,10 @@ function Contact() {
             <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
-                className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
+                disabled={sending}
+                className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember disabled:cursor-not-allowed disabled:opacity-70"
               >
-                <Send className="h-4 w-4" /> {t("contact.form.send")}
+                <Send className="h-4 w-4" /> {sending ? t("contact.form.sending") : t("contact.form.send")}
               </button>
               <button
                 type="button"
