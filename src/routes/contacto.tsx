@@ -102,10 +102,10 @@ function Contact() {
       <div className="mt-12 grid gap-10 md:grid-cols-5">
         <div className="space-y-5 md:col-span-2">
           {[
-            { icon: Phone, label: t("contact.phone"), value: "671 155 809", href: "tel:671155809" },
-            { icon: Phone, label: t("contact.phone"), value: "671 155 752", href: "tel:671155752" },
-            { icon: MessageCircle, label: t("contact.whatsapp"), value: "+34 671 155 809", href: "https://wa.me/34671155809" },
-            { icon: Mail, label: t("contact.email"), value: "info@reformashz.es", href: "mailto:info@reformashz.es" },
+            { icon: Phone, label: t("contact.phone"), value: PHONE_DISPLAY, href: `tel:${PHONE}` },
+            { icon: Phone, label: t("contact.phone"), value: PHONE2_DISPLAY, href: `tel:${PHONE2}` },
+            { icon: MessageCircle, label: t("contact.whatsapp"), value: `+34 ${PHONE_DISPLAY}`, href: WHATSAPP_URL },
+            { icon: Mail, label: t("contact.email"), value: EMAIL, href: MAILTO_URL },
             { icon: ShieldCheck, label: t("brand.quote"), value: t("brand.years") },
           ].map((r, i) => (
             <Reveal key={r.value} delay={i * 70} variant="left">
@@ -122,6 +122,8 @@ function Contact() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Field name="name" label={t("contact.form.name")} required />
               <Field name="phone" label={t("contact.form.phone")} type="tel" required />
+              <Field name="email" label={t("contact.form.email")} type="email" required />
+              <Field name="worktype" label={t("contact.form.type")} />
             </div>
             <div>
               <label className="text-xs uppercase tracking-widest text-muted-foreground">{t("contact.form.message")}</label>
@@ -132,13 +134,23 @@ function Contact() {
                 className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm transition-colors duration-300 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
               />
             </div>
-            <button
-              type="submit"
-              className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
-            >
-              <Send className="h-4 w-4" /> {t("contact.form.send")}
-            </button>
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="submit"
+                className="btn-motion inline-flex items-center gap-2 rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground shadow-ember"
+              >
+                <Send className="h-4 w-4" /> {t("contact.form.send")}
+              </button>
+              <button
+                type="button"
+                onClick={onWhatsApp}
+                className="btn-motion inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-semibold text-foreground hover:border-accent/50 hover:bg-muted"
+              >
+                <MessageCircle className="h-4 w-4" /> {t("contact.form.wa")}
+              </button>
+            </div>
             {sent && <p className="text-sm text-accent">{t("contact.form.sent")}</p>}
+            {error && <p className="text-sm text-destructive">{t("contact.form.error")}</p>}
           </form>
         </Reveal>
       </div>
