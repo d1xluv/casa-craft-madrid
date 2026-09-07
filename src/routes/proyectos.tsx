@@ -31,10 +31,7 @@ export const Route = createFileRoute("/proyectos")({
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:image", content: muroDespues },
-      { name: "twitter:image", content: muroDespues },
     ],
-    links: [{ rel: "canonical", href: "https://casa-craft-madrid.lovable.app/proyectos" }],
   }),
 });
 
