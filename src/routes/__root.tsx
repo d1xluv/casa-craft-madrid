@@ -9,29 +9,29 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { LangProvider } from "@/lib/i18n";
+import { LangProvider, useLang } from "@/lib/i18n";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { MobileActionBar } from "@/components/site/MobileActionBar";
 
 function NotFoundComponent() {
+  const { t } = useLang();
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Go home
-          </Link>
-        </div>
+    <section className="container-page flex min-h-[60vh] flex-col justify-center py-24">
+      <p className="text-xs font-semibold uppercase tracking-widest text-accent">404</p>
+      <h1 className="mt-3 font-display text-4xl uppercase text-navy md:text-6xl">
+        {t("notfound.title")}
+      </h1>
+      <p className="mt-4 max-w-md text-muted-foreground">{t("notfound.text")}</p>
+      <div className="mt-8">
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground"
+        >
+          {t("notfound.home")}
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -40,33 +40,32 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            Try again
-          </button>
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
-          >
-            Go home
-          </Link>
-        </div>
+    <section className="container-page flex min-h-[60vh] flex-col justify-center py-24">
+      <h1 className="font-display text-3xl uppercase text-navy md:text-5xl">
+        No se ha podido cargar la página
+      </h1>
+      <p className="mt-4 max-w-md text-muted-foreground">
+        Ha ocurrido un error. Puede intentarlo de nuevo o volver al inicio.
+      </p>
+      <div className="mt-8 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="inline-flex items-center justify-center rounded-full bg-gradient-ember px-6 py-3 text-sm font-semibold text-accent-foreground"
+        >
+          Reintentar
+        </button>
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center rounded-full border border-border px-6 py-3 text-sm font-semibold"
+        >
+          Ir al inicio
+        </Link>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -74,26 +73,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { name: "theme-color", content: "#fbfcff" },
       { title: "Reformas HZ · Reformas, albañilería y pintura en Madrid y Guadalajara" },
-      { name: "description", content: "Reformas HZ: reformas integrales, albañilería, pintura y alisado en Madrid, Guadalajara y zonas cercanas. Presupuesto sin compromiso. 671 155 809." },
+      {
+        name: "description",
+        content:
+          "Reformas HZ: reformas integrales, albañilería, pintura y alisado en Madrid, Guadalajara y zonas cercanas. Presupuesto sin compromiso. 671 155 809.",
+      },
       { name: "author", content: "Reformas HZ" },
       { property: "og:site_name", content: "Reformas HZ" },
-      { property: "og:title", content: "Reformas HZ · Reformas integrales en Madrid y Guadalajara" },
-      { property: "og:description", content: "Reformas integrales, albañilería y pintura profesional. 25 años de experiencia." },
-
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:locale", content: "es_ES" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: `${import.meta.env.BASE_URL}favicon.png` },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "icon", type: "image/svg+xml", href: `${import.meta.env.BASE_URL}favicon.svg` },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap",
+        rel: "icon",
+        type: "image/png",
+        sizes: "64x64",
+        href: `${import.meta.env.BASE_URL}favicon.png`,
       },
+      { rel: "apple-touch-icon", href: `${import.meta.env.BASE_URL}apple-touch-icon.png` },
     ],
   }),
   shellComponent: RootShell,
@@ -106,6 +107,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es">
       <head>
+        {/* Marca que JS está activo: solo entonces se ocultan los elementos que aparecen al hacer scroll. */}
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <HeadContent />
       </head>
       <body>
@@ -116,19 +121,33 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+function SkipLink() {
+  const { t } = useLang();
+  return (
+    <a
+      href="#main"
+      className="fixed left-3 top-3 z-[60] -translate-y-24 rounded-md bg-navy px-4 py-3 text-sm font-semibold text-primary-foreground transition-transform focus:translate-y-0"
+    >
+      {t("skip")}
+    </a>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
       <LangProvider>
-        <div className="flex min-h-screen flex-col">
+        <SkipLink />
+        <div className="flex min-h-screen flex-col pb-[calc(4.5rem+env(safe-area-inset-bottom))] md:pb-0">
           <Nav />
-          <main className="flex-1">
+          <main id="main" tabIndex={-1} className="flex-1 outline-none">
             <Outlet />
           </main>
           <Footer />
         </div>
+        <MobileActionBar />
       </LangProvider>
     </QueryClientProvider>
   );

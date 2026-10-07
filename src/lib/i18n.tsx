@@ -1,383 +1,252 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type Lang = "es" | "en";
+export type Localized = { es: string; en: string };
 
-type Dict = Record<string, string>;
+/** Textos de interfaz. El contenido (servicios, proyectos, FAQ) vive en src/content. */
+const ui = {
+  skip: { es: "Saltar al contenido", en: "Skip to content" },
+  "nav.home": { es: "Inicio", en: "Home" },
+  "nav.services": { es: "Servicios", en: "Services" },
+  "nav.projects": { es: "Proyectos", en: "Projects" },
+  "nav.about": { es: "Sobre nosotros", en: "About us" },
+  "nav.contact": { es: "Contacto", en: "Contact" },
+  "nav.open": { es: "Abrir menú", en: "Open menu" },
+  "nav.close": { es: "Cerrar menú", en: "Close menu" },
+  "nav.main": { es: "Navegación principal", en: "Main navigation" },
+  "nav.cta": { es: "Solicitar presupuesto", en: "Request a quote" },
+  "lang.label": { es: "Idioma", en: "Language" },
 
-const es: Dict = {
-  "nav.home": "Inicio",
-  "nav.services": "Servicios",
-  "nav.projects": "Proyectos",
-  "nav.about": "Sobre nosotros",
-  "nav.contact": "Contacto",
-  "nav.cta": "Solicitar presupuesto",
+  "cta.call": { es: "Llamar", en: "Call" },
+  "cta.whatsapp": { es: "WhatsApp", en: "WhatsApp" },
 
-  "hero.eyebrow": "Reformas HZ · Madrid y Guadalajara",
-  "hero.title": "Reformas y pintura con acabados de primera.",
-  "hero.subtitle":
-    "Empresa de reformas integrales, albañilería y pintura. Trabajamos en Madrid, Guadalajara y zonas cercanas de la Comunidad de Madrid, con presupuestos claros y plazos cumplidos.",
-  "hero.cta.primary": "Contactar · 671 155 809",
-  "hero.cta.secondary": "Ver proyectos",
-  "hero.stat.years": "Años de experiencia",
-  "hero.stat.projects": "Reformas entregadas",
-  "hero.stat.area": "Zona de trabajo",
+  "brand.tagline": {
+    es: "Reformas, albañilería y pintura",
+    en: "Renovations, bricklaying & painting",
+  },
+  "brand.motto": { es: "Su hogar, en buenas manos", en: "Your home, in good hands" },
+  "brand.quote": { es: "Presupuestos sin compromiso", en: "No-obligation quotes" },
 
-  "services.eyebrow": "Nuestros servicios",
-  "services.title": "Un solo equipo para toda la reforma.",
-  "services.painting.title": "Pintura interior y exterior",
-  "services.painting.desc":
-    "Alisado de paredes, eliminación de gotelé, esmaltes y pintura plástica. Acabados uniformes, limpios y duraderos.",
-  "services.brick.title": "Albañilería de primera",
-  "services.brick.desc":
-    "Tabiquería, aperturas de muro, alicatados, soleras y reparaciones, ejecutadas con criterio técnico y garantía.",
-  "services.reform.title": "Reforma integral de viviendas",
-  "services.reform.desc":
-    "Cocinas, baños y salones. Coordinamos todos los gremios, desde el derribo hasta la entrega de llaves.",
-  "services.bath.title": "Baños y cocinas",
-  "services.bath.desc":
-    "Sustitución de bañera por plato de ducha, alicatado, fontanería, electricidad y mobiliario a medida.",
-  "services.floor.title": "Suelos y solados",
-  "services.floor.desc": "Tarima, porcelánico y gres. Nivelación, colocación y remates con acabado profesional.",
-  "services.facade.title": "Fachadas y exteriores",
-  "services.facade.desc":
-    "Rehabilitación, impermeabilización y pintura de fachadas para viviendas y comunidades de propietarios.",
+  "hero.eyebrow": {
+    es: "Reformas · Albañilería · Pintura",
+    en: "Renovations · Bricklaying · Painting",
+  },
+  "hero.title": {
+    es: "Reformas y pintura con acabados de primera.",
+    en: "Renovations and painting with a first-class finish.",
+  },
+  "hero.subtitle": {
+    es: "Reformas integrales, albañilería y pintura en Madrid, Guadalajara y zonas cercanas.",
+    en: "Full renovations, bricklaying and painting in Madrid, Guadalajara and nearby areas.",
+  },
+  "hero.cta.primary": { es: "Contactar · 671 155 809", en: "Contact us · 671 155 809" },
+  "hero.cta.secondary": { es: "Ver proyectos", en: "View projects" },
 
-  "projects.eyebrow": "Trabajos realizados",
-  "projects.title": "Una selección de obras entregadas.",
-  "projects.subtitle":
-    "Cada proyecto se planifica y se ejecuta de forma individual. Estas son algunas de las reformas finalizadas recientemente.",
-  "projects.tag.apartment": "Reforma integral",
-  "projects.tag.painting": "Pintura",
-  "projects.tag.bath": "Baño",
-  "projects.tag.kitchen": "Cocina",
-  "projects.tag.brick": "Albañilería",
-  "projects.tag.reform": "Obra en curso",
+  "services.eyebrow": { es: "Nuestros servicios", en: "Our services" },
+  "services.title": {
+    es: "Un solo equipo para toda la reforma.",
+    en: "One team for the entire renovation.",
+  },
+  "services.more": { es: "Ver servicio", en: "View service" },
+  "services.all": { es: "Todos los servicios", en: "All services" },
+  "services.whatWeDo": { es: "Qué hacemos", en: "What we do" },
+  "services.ask": { es: "Pedir presupuesto", en: "Request a quote" },
+  "services.seeProject": { es: "Trabajo realizado", en: "Completed job" },
+  "services.others": { es: "Otros servicios", en: "Other services" },
+  "services.replay": { es: "Repetir animación", en: "Replay animation" },
 
-  "projects.d.apartment":
-    "Vivienda de 92 m² reformada íntegramente en 6 semanas: nueva distribución, alisado de paredes, tarima flotante, rodapié y pintura completa. Entregada limpia y lista para su uso.",
-  "projects.d.bath":
-    "Sustitución de bañera por plato de ducha antideslizante, alicatado porcelánico de suelo a techo, mampara, fontanería nueva y mueble a medida. Ejecutado en 8 días sin cortes de suministro.",
-  "projects.d.kitchen":
-    "Apertura de tabique para integrar la cocina en el salón, refuerzo estructural, instalación eléctrica renovada, frente alicatado y pintura lavable. Presupuesto cerrado y plazo cumplido.",
-  "projects.d.painting":
-    "Eliminación de gotelé, alisado con dos manos de plaste, imprimación y dos capas de pintura plástica mate. Mobiliario y suelos protegidos durante toda la obra.",
-  "projects.d.brick":
-    "Muro de ladrillo visto con junta rehundida, ejecutado a plomo y con rejuntado limpio. Albañilería de primera con un acabado pensado para quedar a la vista.",
-  "projects.d.reform":
-    "Obra en curso: derribo, nuevas instalaciones y preparación de paramentos. Seguimiento fotográfico para el cliente y retirada de escombros incluida.",
+  "projects.eyebrow": { es: "Trabajos realizados", en: "Completed work" },
+  "projects.title": {
+    es: "Una selección de obras entregadas.",
+    en: "A selection of delivered projects.",
+  },
+  "projects.result": { es: "Resultado", en: "Result" },
+  "projects.enlarge": { es: "Ampliar foto", en: "Enlarge photo" },
+  "projects.compareLabel": { es: "Comparar antes y después", en: "Compare before and after" },
+  "work.drag": {
+    es: "Arrastre el control para comparar el antes y el después",
+    en: "Drag the handle to compare before and after",
+  },
+  "projects.explore": { es: "Pulse los puntos", en: "Tap the dots" },
+  "projects.explore.reset": { es: "Ver la foto completa", en: "Show the whole photo" },
+  "work.views": { es: "Vistas del resultado", en: "Views of the result" },
+  "work.before": { es: "Antes", en: "Before" },
+  "work.after": { es: "Después", en: "After" },
 
-  "work.before": "Antes",
-  "work.after": "Después",
-  "work.drag": "Arrastre el control para comparar el antes y el después",
-  "work.result": "Resultado",
-  "work.views": "Vistas del resultado",
-  "work.floors.title": "Renovación de suelos",
-  "work.floors.type": "Pavimentos y revestimientos",
-  "work.floors.desc":
-    "Renovación y sustitución de pavimentos, adaptándonos a las necesidades de cada espacio. Este proyecto muestra un acabado en madera, aunque también trabajamos con suelos cerámicos y diferentes soluciones de pavimentación.",
-  "work.floors.result": "Superficie preparada y pavimento nuevo instalado, con un acabado uniforme y remates limpios en todo el perímetro.",
-  "work.wall.title": "Muro y valla perimetral",
-  "work.wall.type": "Albañilería y cerramientos",
-  "work.wall.desc":
-    "Ejecución de muro con acabado en piedra y cerramiento perimetral de la parcela, incluyendo pilares, hueco de acceso y armario para instalaciones.",
-  "work.wall.result": "Parcela cerrada y delimitada, con un muro a plomo, juntas cuidadas y un acabado exterior resistente y homogéneo.",
-  "work.paint.title": "Pintura y acabado de superficies",
-  "work.paint.type": "Pintura interior",
-  "work.paint.desc":
-    "Preparación de paredes y techos, corrección de imperfecciones y aplicación de pintura para renovar por completo el aspecto de la vivienda.",
-  "work.paint.result": "Paredes lisas y uniformes, techos renovados y una estancia mucho más luminosa, entregada limpia y lista para su uso.",
-  "work.kitchen.view1": "Cocina 1",
-  "work.kitchen.view2": "Cocina 2",
-  "work.kitchen.title": "Reforma de cocina",
-  "work.kitchen.type": "Cocinas",
-  "work.kitchen.desc":
-    "Reforma integral de cocina: mobiliario, encimera, frente, iluminación y colocación de electrodomésticos, aprovechando al máximo el espacio disponible.",
-  "work.kitchen.result": "Cocina totalmente equipada y funcional, con acabados actuales y una distribución pensada para el uso diario.",
+  "lightbox.close": { es: "Cerrar", en: "Close" },
+  "lightbox.prev": { es: "Foto anterior", en: "Previous photo" },
+  "lightbox.next": { es: "Foto siguiente", en: "Next photo" },
+  "lightbox.of": { es: "de", en: "of" },
 
+  "about.eyebrow": { es: "Sobre nosotros", en: "About us" },
+  "about.title": {
+    es: "Especialidades y método de trabajo.",
+    en: "Specialities and working method.",
+  },
+  "about.intro": {
+    es: "Reformas HZ es el nombre comercial de Toni Hozas, profesional autónomo de la construcción especializado en reformas, albañilería y pintura.",
+    en: "Reformas HZ is the trading name of Toni Hozas, a self-employed construction professional specialising in renovations, bricklaying and painting.",
+  },
+  "about.skills.title": { es: "Especialidades", en: "Specialities" },
+  "about.values.title": { es: "Cómo trabajamos", en: "How we work" },
+  "about.values.subtitle": {
+    es: "Un proceso ordenado, de la primera llamada a la entrega final.",
+    en: "An orderly process, from the first call to final handover.",
+  },
 
-  "brand.name": "Reformas HZ",
-  "brand.tagline": "Reformas, albañilería y pintura",
-  "brand.motto": "Su hogar, en buenas manos",
-  "brand.quote": "Presupuestos sin compromiso",
-  "brand.years": "25 años de experiencia",
-  "cards.hint": "Sitúe el cursor sobre cada obra para ver el detalle",
+  "contact.eyebrow": { es: "Contacto", en: "Contact" },
+  "contact.title": {
+    es: "Solicite información o presupuesto.",
+    en: "Request information or a quote.",
+  },
+  "contact.phone": { es: "Teléfono", en: "Phone" },
+  "contact.whatsapp": { es: "WhatsApp", en: "WhatsApp" },
+  "contact.email": { es: "Correo electrónico", en: "Email" },
+  "contact.area": { es: "Zona de trabajo", en: "Service area" },
+  "contact.area.long": {
+    es: "Trabajamos en Madrid, Guadalajara y zonas cercanas de la Comunidad de Madrid.",
+    en: "We work in Madrid, Guadalajara and nearby areas of the Madrid region.",
+  },
+  "contact.form.title": { es: "Pida su presupuesto", en: "Request your quote" },
+  "contact.form.subtitle": {
+    es: "Sin compromiso. Le respondemos por teléfono o correo.",
+    en: "No obligation. We will reply by phone or email.",
+  },
+  "contact.form.step1": { es: "¿Qué necesita?", en: "What do you need?" },
+  "contact.form.step1.hint": {
+    es: "Puede elegir varias opciones.",
+    en: "You can choose several options.",
+  },
+  "contact.form.step2": { es: "Sus datos", en: "Your details" },
+  "contact.form.step3": { es: "Cuéntenos el trabajo", en: "Tell us about the job" },
+  "contact.form.location": { es: "Localidad de la obra", en: "Location of the works" },
+  "contact.form.message.placeholder": {
+    es: "Por ejemplo: pintar un piso de 80 m² y cambiar el suelo del salón.",
+    en: "For example: paint an 80 m² flat and replace the living room floor.",
+  },
+  "contact.form.again": { es: "Enviar otra solicitud", en: "Send another request" },
+  "cta.quote": { es: "Pedir presupuesto", en: "Request a quote" },
+  "contact.form.name": { es: "Nombre", en: "Name" },
+  "contact.form.phone": { es: "Teléfono", en: "Phone" },
+  "contact.form.email": { es: "Correo electrónico (opcional)", en: "Email (optional)" },
+  "contact.form.type": { es: "Tipo de trabajo", en: "Type of work" },
+  "contact.form.type.placeholder": { es: "Seleccione una opción", en: "Choose an option" },
+  "contact.form.type.other": { es: "Otro", en: "Other" },
+  "contact.form.message": { es: "Describa brevemente el trabajo", en: "Briefly describe the job" },
+  "contact.form.privacy.pre": { es: "He leído la", en: "I have read the" },
+  "contact.form.privacy.link": { es: "política de privacidad", en: "privacy policy" },
+  "contact.form.privacy.post": {
+    es: "y acepto que se usen mis datos para responder a esta solicitud.",
+    en: "and agree to my data being used to reply to this request.",
+  },
+  "contact.form.send": { es: "Enviar solicitud", en: "Send request" },
+  "contact.form.sending": { es: "Enviando solicitud...", en: "Sending request..." },
+  "contact.form.wa": { es: "Enviar por WhatsApp", en: "Send via WhatsApp" },
+  "contact.form.sent": {
+    es: "Solicitud enviada correctamente. Nos pondremos en contacto con usted lo antes posible.",
+    en: "Request sent successfully. We will get back to you as soon as possible.",
+  },
+  "contact.form.error": {
+    es: "No ha sido posible enviar la solicitud. Inténtelo de nuevo o contacte directamente por WhatsApp.",
+    en: "The request could not be sent. Please try again or contact us directly on WhatsApp.",
+  },
+  "contact.form.invalid": {
+    es: "Revise los campos marcados.",
+    en: "Please check the highlighted fields.",
+  },
+  "contact.err.name": { es: "Indique su nombre.", en: "Please enter your name." },
+  "contact.err.phone": {
+    es: "Indique un teléfono válido (9 cifras).",
+    en: "Please enter a valid phone number.",
+  },
+  "contact.err.email": { es: "Indique un correo válido.", en: "Please enter a valid email." },
+  "contact.err.type": { es: "Elija al menos una opción.", en: "Choose at least one option." },
+  "contact.err.message": {
+    es: "Cuéntenos algo más (mínimo 10 caracteres).",
+    en: "Tell us a bit more (at least 10 characters).",
+  },
+  "contact.err.privacy": {
+    es: "Acepte la política de privacidad para enviar.",
+    en: "Please accept the privacy policy to send.",
+  },
+  "contact.form.info": {
+    es: "Responsable: Toni Hozas (Reformas HZ). Usamos sus datos solo para responder a su solicitud, nunca para publicidad. El formulario se entrega a través de Formspree.",
+    en: "Controller: Toni Hozas (Reformas HZ). We only use your data to reply to your request, never for advertising. The form is delivered through Formspree.",
+  },
+  "contact.form.info.more": { es: "Más información", en: "More information" },
+  "faq.title": { es: "Preguntas frecuentes", en: "Frequently asked questions" },
 
-  "about.eyebrow": "Sobre nosotros",
-  "about.title": "Especialidades y método de trabajo.",
-  "about.intro":
-    "Reformas HZ reúne 25 años de oficio en reformas integrales, albañilería y pintura. A continuación puede consultar nuestras especialidades y el proceso que seguimos en cada proyecto.",
-  "about.skills.title": "Especialidades",
-  "about.skills.subtitle": "Áreas en las que trabajamos habitualmente, con equipo propio y acabados cuidados.",
-  "about.values.title": "Cómo trabajamos",
-  "about.values.subtitle": "Un proceso ordenado, de la primera llamada a la entrega final.",
+  "footer.tag": {
+    es: "Reformas integrales · Albañilería · Pintura y alisado · Baños y cocinas · Suelos y fachadas",
+    en: "Full renovations · Bricklaying · Painting & skimming · Bathrooms and kitchens · Floors and façades",
+  },
+  "footer.legal": { es: "Información legal", en: "Legal" },
+  "footer.legalNotice": { es: "Aviso legal", en: "Legal notice" },
+  "footer.privacy": { es: "Política de privacidad", en: "Privacy policy" },
+  "footer.cookies": { es: "Política de cookies", en: "Cookie policy" },
+  "footer.rights": { es: "Todos los derechos reservados.", en: "All rights reserved." },
 
-  "about.spec1.t": "Reforma integral",
-  "about.spec1.d": "Proyectos completos de vivienda con gestión de todos los gremios y una única interlocución.",
-  "about.spec2.t": "Albañilería",
-  "about.spec2.d": "Tabiquería, aperturas, soleras y refuerzos ejecutados con criterio técnico.",
-  "about.spec3.t": "Pintura y alisado",
-  "about.spec3.d": "Eliminación de gotelé, alisado, esmaltes y pintura interior y exterior.",
-  "about.spec4.t": "Baños y cocinas",
-  "about.spec4.d": "Reformas completas, incluyendo fontanería, electricidad, alicatado y mobiliario.",
-  "about.spec5.t": "Suelos y solados",
-  "about.spec5.d": "Tarima, porcelánico y gres, con nivelación previa y remates precisos.",
-  "about.spec6.t": "Pladur y techos",
-  "about.spec6.d": "Trasdosados, techos registrables, focos empotrados y aislamiento acústico.",
-  "about.spec7.t": "Fachadas y exteriores",
-  "about.spec7.d": "Rehabilitación, impermeabilización y pintura exterior en viviendas y comunidades.",
-  "about.spec8.t": "Reparaciones",
-  "about.spec8.d": "Intervenciones puntuales, humedades y mantenimiento con respuesta rápida.",
+  "legal.onlyEs": { es: "", en: "Legal texts are only available in Spanish." },
+  "legal.updated": { es: "Última actualización", en: "Last updated" },
 
-  "about.step1.t": "Primer contacto",
-  "about.step1.d":
-    "Atendemos su consulta por teléfono o WhatsApp y recogemos los datos esenciales del proyecto y sus necesidades.",
-  "about.step2.t": "Valoración",
-  "about.step2.d":
-    "Visitamos el inmueble, tomamos medidas y analizamos el estado del espacio, los materiales y las soluciones adecuadas.",
-  "about.step3.t": "Presupuesto",
-  "about.step3.d":
-    "Elaboramos una propuesta detallada y por escrito, con partidas claras, plazos estimados y sin compromiso.",
-  "about.step4.t": "Preparación",
-  "about.step4.d":
-    "Planificamos la obra, seleccionamos materiales, coordinamos al equipo y protegemos las zonas que no se intervienen.",
-  "about.step5.t": "Ejecución",
-  "about.step5.d":
-    "Realizamos los trabajos cuidando acabados y detalles, manteniendo la obra limpia y con seguimiento continuo.",
-  "about.step6.t": "Resultado final",
-  "about.step6.d":
-    "Revisamos el trabajo con usted, retiramos escombros y entregamos la vivienda terminada, con garantía sobre la obra.",
+  "notfound.title": { es: "Página no encontrada", en: "Page not found" },
+  "notfound.text": {
+    es: "La página que busca no existe o ha cambiado de dirección.",
+    en: "The page you are looking for does not exist or has moved.",
+  },
+  "notfound.home": { es: "Volver al inicio", en: "Back to home" },
+} satisfies Record<string, Localized>;
 
-  "about.value1.t": "Presupuesto sin compromiso",
-  "about.value1.d": "Visita y medición gratuitas, con presupuesto detallado por escrito.",
-  "about.value2.t": "Plazos reales",
-  "about.value2.d": "Fecha de inicio, hitos y entrega definidos desde el primer día.",
-  "about.value3.t": "Obra limpia",
-  "about.value3.d": "Protección de suelos y mobiliario, con retirada de escombros incluida.",
-  "about.value4.t": "Garantía",
-  "about.value4.d": "Todos los trabajos cuentan con garantía sobre mano de obra y materiales.",
+export type UiKey = keyof typeof ui;
 
-  "contact.eyebrow": "Contacto",
-  "contact.title": "Solicite información o presupuesto.",
-  "contact.subtitle": "\n",
-  "contact.phone": "Teléfono",
-  "contact.whatsapp": "WhatsApp",
-  "contact.email": "Correo electrónico",
-  "contact.area": "Zona de trabajo",
-  "contact.area.value": "Madrid, Guadalajara y zonas cercanas",
-  "contact.area.long": "Trabajamos en Madrid, Guadalajara y zonas cercanas de la Comunidad de Madrid.",
-  "contact.form.name": "Nombre",
-  "contact.form.phone": "Teléfono de contacto",
-  "contact.form.email": "Correo electrónico",
-  "contact.form.type": "Tipo de trabajo",
-  "contact.form.message": "Describa brevemente el proyecto",
-  "contact.form.send": "Enviar solicitud por correo",
-  "contact.form.sending": "Enviando solicitud...",
-  "contact.form.wa": "Enviar por WhatsApp",
-  "contact.form.sent":
-    "Solicitud enviada correctamente. Nos pondremos en contacto con usted a la mayor brevedad posible.",
-  "contact.form.error":
-    "No ha sido posible enviar la solicitud. Por favor, inténtelo de nuevo o contacte directamente con nosotros por WhatsApp.",
-
-  "footer.tag":
-    "Reformas integrales · Albañilería · Pintura y alisado · Baños y cocinas · Suelos y fachadas",
-  "footer.rights": "Todos los derechos reservados.",
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (k: UiKey) => string;
+  /** Devuelve el texto en el idioma activo. */
+  l: (x: Localized) => string;
 };
 
-const en: Dict = {
-  "nav.home": "Home",
-  "nav.services": "Services",
-  "nav.projects": "Projects",
-  "nav.about": "About us",
-  "nav.contact": "Contact",
-  "nav.cta": "Request a quote",
+const LangCtx = createContext<Ctx>({
+  lang: "es",
+  setLang: () => {},
+  t: (k) => ui[k].es,
+  l: (x) => x.es,
+});
 
-  "hero.eyebrow": "Reformas HZ · Madrid & Guadalajara",
-  "hero.title": "Renovations and painting with a first-class finish.",
-  "hero.subtitle":
-    "A renovation, bricklaying and painting company working across Madrid, Guadalajara and nearby areas of the Madrid region, with clear quotes and deadlines that are met.",
-  "hero.cta.primary": "Contact us · 671 155 809",
-  "hero.cta.secondary": "View projects",
-  "hero.stat.years": "Years of experience",
-  "hero.stat.projects": "Renovations delivered",
-  "hero.stat.area": "Service area",
-
-  "services.eyebrow": "Our services",
-  "services.title": "One team for the entire renovation.",
-  "services.painting.title": "Interior & exterior painting",
-  "services.painting.desc":
-    "Wall skimming, textured-finish removal, enamels and emulsion. Even, clean and long-lasting results.",
-  "services.brick.title": "First-class bricklaying",
-  "services.brick.desc":
-    "Partition walls, openings, tiling, screeds and repairs, carried out to a technical standard and guaranteed.",
-  "services.reform.title": "Full home renovation",
-  "services.reform.desc":
-    "Kitchens, bathrooms and living areas. We coordinate every trade, from strip-out to handover.",
-  "services.bath.title": "Bathrooms & kitchens",
-  "services.bath.desc":
-    "Bath-to-shower conversions, tiling, plumbing, electrics and bespoke cabinetry.",
-  "services.floor.title": "Floors",
-  "services.floor.desc": "Engineered wood, porcelain and stoneware, with levelling and precise finishing.",
-  "services.facade.title": "Façades & exteriors",
-  "services.facade.desc":
-    "Rehabilitation, waterproofing and exterior painting for private homes and residential buildings.",
-
-  "projects.eyebrow": "Completed work",
-  "projects.title": "A selection of delivered projects.",
-  "projects.subtitle":
-    "Every project is planned and executed individually. Here are some of the renovations completed recently.",
-  "projects.tag.apartment": "Full renovation",
-  "projects.tag.painting": "Painting",
-  "projects.tag.bath": "Bathroom",
-  "projects.tag.kitchen": "Kitchen",
-  "projects.tag.brick": "Bricklaying",
-  "projects.tag.reform": "Work in progress",
-
-  "projects.d.apartment":
-    "92 m² home fully renovated in 6 weeks: new layout, skimmed walls, engineered flooring, skirting and complete repaint. Handed over clean and ready to use.",
-  "projects.d.bath":
-    "Bathtub replaced with a non-slip shower tray, floor-to-ceiling porcelain tiling, screen, new plumbing and bespoke unit. Completed in 8 days with no supply cuts.",
-  "projects.d.kitchen":
-    "Wall opened to integrate the kitchen with the living room, structural reinforcement, rewired electrics, tiled splashback and washable paint. Fixed quote, delivered on schedule.",
-  "projects.d.painting":
-    "Textured finish removed, two coats of filler skimmed flat, primer and two coats of matt emulsion. Furniture and floors protected throughout.",
-  "projects.d.brick":
-    "Exposed brick wall with recessed joints, built true to plumb with clean pointing. Bricklaying finished to be seen, not hidden.",
-  "projects.d.reform":
-    "Work in progress: strip-out, new services and wall preparation. Photographic updates for the client and debris removal included.",
-
-  "work.before": "Before",
-  "work.after": "After",
-  "work.drag": "Drag the handle to compare before and after",
-  "work.result": "Result",
-  "work.views": "Views of the result",
-  "work.floors.title": "Floor renovation",
-  "work.floors.type": "Flooring & surfaces",
-  "work.floors.desc":
-    "Renovation and replacement of flooring, adapted to the needs of each space. This project shows a wood finish, although we also work with ceramic floors and other flooring solutions.",
-  "work.floors.result": "Subfloor prepared and new flooring installed, with an even finish and clean edges throughout.",
-  "work.wall.title": "Boundary wall & fencing",
-  "work.wall.type": "Bricklaying & enclosures",
-  "work.wall.desc":
-    "Construction of a stone-finished wall and perimeter fencing for the plot, including pillars, access opening and a cabinet for services.",
-  "work.wall.result": "Plot fully enclosed and defined, with a wall built true to plumb, careful jointing and a durable exterior finish.",
-  "work.paint.title": "Painting & surface finishing",
-  "work.paint.type": "Interior painting",
-  "work.paint.desc":
-    "Preparation of walls and ceilings, correction of imperfections and repainting to completely renew the look of the home.",
-  "work.paint.result": "Smooth, even walls, refreshed ceilings and a much brighter room, handed over clean and ready to use.",
-  "work.kitchen.view1": "Kitchen 1",
-  "work.kitchen.view2": "Kitchen 2",
-  "work.kitchen.title": "Kitchen renovation",
-  "work.kitchen.type": "Kitchens",
-  "work.kitchen.desc":
-    "Full kitchen renovation: units, worktop, splashback, lighting and appliance installation, making the most of the available space.",
-  "work.kitchen.result": "A fully equipped, functional kitchen with contemporary finishes and a layout designed for everyday use.",
-
-
-  "brand.name": "Reformas HZ",
-  "brand.tagline": "Renovations, bricklaying & painting",
-  "brand.motto": "Your home, in good hands",
-  "brand.quote": "No-obligation quotes",
-  "brand.years": "25 years of experience",
-  "cards.hint": "Hover over each project to see the details",
-
-  "about.eyebrow": "About us",
-  "about.title": "Specialities and working method.",
-  "about.intro":
-    "Reformas HZ brings together 25 years of experience in full renovations, bricklaying and painting. Below you can review our specialities and the process we follow on every project.",
-  "about.skills.title": "Specialities",
-  "about.skills.subtitle": "The areas we work in day to day, with our own team and carefully executed finishes.",
-  "about.values.title": "How we work",
-  "about.values.subtitle": "An orderly process, from the first call to final handover.",
-
-  "about.spec1.t": "Full renovation",
-  "about.spec1.d": "Complete home projects with every trade managed through a single point of contact.",
-  "about.spec2.t": "Bricklaying",
-  "about.spec2.d": "Partitions, openings, screeds and reinforcements executed to a technical standard.",
-  "about.spec3.t": "Painting & skimming",
-  "about.spec3.d": "Texture removal, skimming, enamels and interior and exterior painting.",
-  "about.spec4.t": "Bathrooms & kitchens",
-  "about.spec4.d": "Complete refits including plumbing, electrics, tiling and cabinetry.",
-  "about.spec5.t": "Floors",
-  "about.spec5.d": "Engineered wood, porcelain and stoneware, with prior levelling and precise trims.",
-  "about.spec6.t": "Plasterboard & ceilings",
-  "about.spec6.d": "Dry lining, access ceilings, recessed lighting and acoustic insulation.",
-  "about.spec7.t": "Façades & exteriors",
-  "about.spec7.d": "Rehabilitation, waterproofing and exterior painting for homes and buildings.",
-  "about.spec8.t": "Repairs",
-  "about.spec8.d": "Targeted works, damp issues and maintenance with a fast response.",
-
-  "about.step1.t": "First contact",
-  "about.step1.d":
-    "We take your enquiry by phone or WhatsApp and gather the essential details of the project and your needs.",
-  "about.step2.t": "Assessment",
-  "about.step2.d":
-    "We visit the property, take measurements and review the condition of the space, materials and suitable solutions.",
-  "about.step3.t": "Quote",
-  "about.step3.d":
-    "We prepare a detailed written proposal with clear line items, estimated timescales and no obligation.",
-  "about.step4.t": "Preparation",
-  "about.step4.d":
-    "We plan the works, select materials, coordinate the team and protect the areas that are not being altered.",
-  "about.step5.t": "Execution",
-  "about.step5.d":
-    "We carry out the works with care for finishes and detail, keeping the site clean and under continuous supervision.",
-  "about.step6.t": "Final result",
-  "about.step6.d":
-    "We review the work with you, remove all debris and hand over the finished property, with a guarantee on the works.",
-
-  "about.value1.t": "No-obligation quote",
-  "about.value1.d": "Free site visit and measurement, with a detailed written quote.",
-  "about.value2.t": "Realistic timescales",
-  "about.value2.d": "Start date, milestones and handover defined from day one.",
-  "about.value3.t": "Clean site",
-  "about.value3.d": "Floor and furniture protection, with debris removal included.",
-  "about.value4.t": "Guarantee",
-  "about.value4.d": "All works are guaranteed on labour and materials.",
-
-  "contact.eyebrow": "Contact",
-  "contact.title": "Request information or a quote.",
-  "contact.subtitle":
-    "Contact Reformas HZ to request a quote tailored to your project. Every enquiry is handled promptly and we will get back to you as soon as possible.",
-  "contact.phone": "Phone",
-  "contact.whatsapp": "WhatsApp",
-  "contact.email": "Email",
-  "contact.area": "Service area",
-  "contact.area.value": "Madrid, Guadalajara and nearby areas",
-  "contact.area.long": "We work in Madrid, Guadalajara and nearby areas of the Madrid region.",
-  "contact.form.name": "Name",
-  "contact.form.phone": "Contact phone",
-  "contact.form.email": "Email address",
-  "contact.form.type": "Type of work",
-  "contact.form.message": "Briefly describe the project",
-  "contact.form.send": "Send request by email",
-  "contact.form.sending": "Sending request...",
-  "contact.form.wa": "Send via WhatsApp",
-  "contact.form.sent": "Request sent successfully. We will get back to you as soon as possible.",
-  "contact.form.error":
-    "The request could not be sent. Please try again or contact us directly on WhatsApp.",
-
-  "footer.tag": "Full renovations · Bricklaying · Painting & skimming · Bathrooms and kitchens · Floors and façades",
-  "footer.rights": "All rights reserved.",
-};
-
-const dicts: Record<Lang, Dict> = { es, en };
-
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string };
-const LangCtx = createContext<Ctx>({ lang: "es", setLang: () => {}, t: (k) => k });
+// Preferencia de idioma elegida por el usuario. Almacenamiento técnico exento
+// de consentimiento (ver política de cookies).
+const STORAGE_KEY = "lang";
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("es");
+
   useEffect(() => {
-    const saved = typeof window !== "undefined" ? (localStorage.getItem("lang") as Lang | null) : null;
-    if (saved === "es" || saved === "en") setLangState(saved);
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === "es" || saved === "en") setLangState(saved);
+    } catch {
+      /* almacenamiento no disponible */
+    }
   }, []);
-  const setLang = (l: Lang) => {
-    setLangState(l);
-    if (typeof window !== "undefined") localStorage.setItem("lang", l);
-  };
-  const t = (k: string) => dicts[lang][k] ?? k;
-  return <LangCtx.Provider value={{ lang, setLang, t }}>{children}</LangCtx.Provider>;
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const setLang = useCallback((next: Lang) => {
+    setLangState(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* almacenamiento no disponible */
+    }
+  }, []);
+
+  const t = useCallback((k: UiKey) => ui[k][lang], [lang]);
+  const l = useCallback((x: Localized) => x[lang], [lang]);
+
+  return <LangCtx.Provider value={{ lang, setLang, t, l }}>{children}</LangCtx.Provider>;
 }
 
 export const useLang = () => useContext(LangCtx);

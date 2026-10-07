@@ -10,19 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreMiRouteImport } from './routes/sobre-mi'
-import { Route as ServiciosRouteImport } from './routes/servicios'
 import { Route as ProyectosRouteImport } from './routes/proyectos'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as AvisoLegalRouteImport } from './routes/aviso-legal'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServiciosIndexRouteImport } from './routes/servicios.index'
+import { Route as ServiciosIdRouteImport } from './routes/servicios.$id'
 
 const SobreMiRoute = SobreMiRouteImport.update({
   id: '/sobre-mi',
   path: '/sobre-mi',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServiciosRoute = ServiciosRouteImport.update({
-  id: '/servicios',
-  path: '/servicios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProyectosRoute = ProyectosRouteImport.update({
@@ -30,9 +29,24 @@ const ProyectosRoute = ProyectosRouteImport.update({
   path: '/proyectos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AvisoLegalRoute = AvisoLegalRouteImport.update({
+  id: '/aviso-legal',
+  path: '/aviso-legal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -40,43 +54,97 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServiciosIndexRoute = ServiciosIndexRouteImport.update({
+  id: '/servicios/',
+  path: '/servicios/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiciosIdRoute = ServiciosIdRouteImport.update({
+  id: '/servicios/$id',
+  path: '/servicios/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
-  '/servicios': typeof ServiciosRoute
   '/sobre-mi': typeof SobreMiRoute
+  '/servicios/$id': typeof ServiciosIdRoute
+  '/servicios/': typeof ServiciosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
-  '/servicios': typeof ServiciosRoute
   '/sobre-mi': typeof SobreMiRoute
+  '/servicios/$id': typeof ServiciosIdRoute
+  '/servicios': typeof ServiciosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aviso-legal': typeof AvisoLegalRoute
   '/contacto': typeof ContactoRoute
+  '/cookies': typeof CookiesRoute
+  '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
-  '/servicios': typeof ServiciosRoute
   '/sobre-mi': typeof SobreMiRoute
+  '/servicios/$id': typeof ServiciosIdRoute
+  '/servicios/': typeof ServiciosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacto' | '/proyectos' | '/servicios' | '/sobre-mi'
+  fullPaths:
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/cookies'
+    | '/privacidad'
+    | '/proyectos'
+    | '/sobre-mi'
+    | '/servicios/$id'
+    | '/servicios/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacto' | '/proyectos' | '/servicios' | '/sobre-mi'
-  id: '__root__' | '/' | '/contacto' | '/proyectos' | '/servicios' | '/sobre-mi'
+  to:
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/cookies'
+    | '/privacidad'
+    | '/proyectos'
+    | '/sobre-mi'
+    | '/servicios/$id'
+    | '/servicios'
+  id:
+    | '__root__'
+    | '/'
+    | '/aviso-legal'
+    | '/contacto'
+    | '/cookies'
+    | '/privacidad'
+    | '/proyectos'
+    | '/sobre-mi'
+    | '/servicios/$id'
+    | '/servicios/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AvisoLegalRoute: typeof AvisoLegalRoute
   ContactoRoute: typeof ContactoRoute
+  CookiesRoute: typeof CookiesRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   ProyectosRoute: typeof ProyectosRoute
-  ServiciosRoute: typeof ServiciosRoute
   SobreMiRoute: typeof SobreMiRoute
+  ServiciosIdRoute: typeof ServiciosIdRoute
+  ServiciosIndexRoute: typeof ServiciosIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -88,18 +156,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SobreMiRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/servicios': {
-      id: '/servicios'
-      path: '/servicios'
-      fullPath: '/servicios'
-      preLoaderRoute: typeof ServiciosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/proyectos': {
       id: '/proyectos'
       path: '/proyectos'
       fullPath: '/proyectos'
       preLoaderRoute: typeof ProyectosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contacto': {
@@ -109,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aviso-legal': {
+      id: '/aviso-legal'
+      path: '/aviso-legal'
+      fullPath: '/aviso-legal'
+      preLoaderRoute: typeof AvisoLegalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -116,15 +198,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicios/': {
+      id: '/servicios/'
+      path: '/servicios'
+      fullPath: '/servicios/'
+      preLoaderRoute: typeof ServiciosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicios/$id': {
+      id: '/servicios/$id'
+      path: '/servicios/$id'
+      fullPath: '/servicios/$id'
+      preLoaderRoute: typeof ServiciosIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AvisoLegalRoute: AvisoLegalRoute,
   ContactoRoute: ContactoRoute,
+  CookiesRoute: CookiesRoute,
+  PrivacidadRoute: PrivacidadRoute,
   ProyectosRoute: ProyectosRoute,
-  ServiciosRoute: ServiciosRoute,
   SobreMiRoute: SobreMiRoute,
+  ServiciosIdRoute: ServiciosIdRoute,
+  ServiciosIndexRoute: ServiciosIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

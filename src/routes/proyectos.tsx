@@ -1,127 +1,100 @@
-import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { CheckCircle2, MoveHorizontal } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Expand, MoveHorizontal } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import { seo } from "@/lib/seo";
+import { projects, type Project } from "@/content/projects";
 import { Reveal } from "@/components/site/Reveal";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
-
-const assetUrl = (filename: string) => `${import.meta.env.BASE_URL}assets/${filename}`;
-
-const suelosAntes = assetUrl("suelos_antes.webp");
-const suelosDespues1 = assetUrl("suelos_despues_1.webp");
-const suelosDespues2 = assetUrl("suelos_despues_2.webp");
-const muroAntes = assetUrl("muro_y_valla_antes.webp");
-const muroDespues = assetUrl("muro_y_valla_despues.webp");
-const pinturaAntes = assetUrl("pintura_antes.webp");
-const pinturaDespues = assetUrl("pintura_despues.png");
-const cocina1 = assetUrl("cocinas_1.webp");
-const cocina2 = assetUrl("cocinas_2.webp");
+import { Lightbox } from "@/components/site/Lightbox";
+import { PhotoExplorer } from "@/components/site/PhotoExplorer";
+import { CtaBar } from "@/components/site/CtaBar";
 
 export const Route = createFileRoute("/proyectos")({
   component: Projects,
-  head: () => ({
-    meta: [
-      { title: "Proyectos · Reformas HZ Madrid y Guadalajara" },
-      {
-        name: "description",
-        content:
-          "Trabajos reales de Reformas HZ: suelos, muros y vallas, pintura y cocinas, con comparativas antes y después de cada obra en Madrid y Guadalajara.",
-      },
-      { property: "og:title", content: "Proyectos · Reformas HZ" },
-      {
-        property: "og:description",
-        content: "Obras entregadas con comparativa antes y después: suelos, albañilería, pintura y cocinas.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    seo({
+      path: "/proyectos",
+      title: "Proyectos · Reformas HZ Madrid y Guadalajara",
+      description:
+        "Trabajos reales de Reformas HZ: pintura, suelos, muro y valla perimetral y cocinas, con fotos de antes y después.",
+    }),
 });
 
-type Project = {
-  id: string;
-  title: string;
-  type: string;
-  desc: string;
-  result: string;
-  before: string;
-  afters: string[];
-  beforeLabel?: string;
-  afterLabel?: string;
-};
-
 function ProjectBlock({ p, index }: { p: Project; index: number }) {
-  const { t } = useLang();
-  const [active, setActive] = useState(0);
+  const { t, l } = useLang();
   const flip = index % 2 === 1;
+  const [before, ...afters] = p.photos;
+  const [active, setActive] = useState(0);
+  const [zoom, setZoom] = useState<number | null>(null);
 
   return (
-    <article className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
-      <Reveal
-        variant={flip ? "right" : "left"}
-        className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}
-      >
-        <BeforeAfter
-          before={p.before}
-          after={p.afters[active]}
-          beforeLabel={p.beforeLabel ?? t("work.before")}
-          afterLabel={p.afterLabel ?? t("work.after")}
-          alt={p.title}
-        />
-
-        {p.afters.length > 1 && (
-          <div className="mt-4">
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-              {t("work.views")}
-            </p>
-            <div className="mt-3 flex gap-3">
-              {p.afters.map((src, i) => (
-                <button
-                  key={src}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-label={`${t("work.after")} ${i + 1}`}
-                  aria-pressed={active === i}
-                  className={`overflow-hidden rounded-xl ring-2 transition-all duration-300 hover:-translate-y-0.5 ${
-                    active === i ? "ring-accent" : "ring-border opacity-70 hover:opacity-100"
-                  }`}
-                >
-                  <img
-                    src={src}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="h-16 w-24 object-cover sm:h-20 sm:w-28"
-                  />
-                </button>
-              ))}
+    <article id={p.id} className="grid scroll-mt-28 items-center gap-8 md:grid-cols-12 md:gap-12">
+      <Reveal className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
+        {p.hotspots ? (
+          <PhotoExplorer photo={p.photos[0]} hotspots={p.hotspots} />
+        ) : (
+          <>
+            <div className="relative">
+              <BeforeAfter before={before} after={afters[active] ?? before} />
+              <button
+                type="button"
+                onClick={() => setZoom(1 + active)}
+                className="absolute bottom-3 right-3 grid h-10 w-10 place-items-center rounded-full bg-background/90 text-navy shadow-soft transition-transform hover:scale-105"
+                aria-label={`${t("projects.enlarge")}: ${l(p.title)}`}
+              >
+                <Expand className="h-4 w-4" aria-hidden="true" />
+              </button>
             </div>
-          </div>
-        )}
 
-        <p className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
-          <MoveHorizontal className="h-3.5 w-3.5 text-accent" />
-          {t("work.drag")}
-        </p>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+              <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                <MoveHorizontal className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                {t("work.drag")}
+              </p>
+              {afters.length > 1 && (
+                <div role="group" aria-label={t("work.views")} className="flex gap-2">
+                  {afters.map((ph, i) => (
+                    <button
+                      key={ph.src}
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-pressed={active === i}
+                      aria-label={l(ph.label)}
+                      className={`overflow-hidden rounded-lg ring-2 transition-all duration-300 hover:-translate-y-0.5 ${
+                        active === i ? "ring-accent" : "opacity-70 ring-border hover:opacity-100"
+                      }`}
+                    >
+                      <img
+                        src={ph.sm}
+                        alt=""
+                        loading="lazy"
+                        className="h-12 w-16 object-cover sm:h-14 sm:w-20"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </>
+        )}
+        <Lightbox photos={p.photos} index={zoom} title={l(p.title)} onClose={() => setZoom(null)} />
       </Reveal>
 
-      <Reveal
-        variant={flip ? "left" : "right"}
-        delay={120}
-        className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}
-      >
+      <Reveal delay={120} className={`md:col-span-5 ${flip ? "md:order-1" : ""}`}>
         <span className="inline-flex items-center rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-secondary-foreground">
-          {p.type}
+          {l(p.category)}
         </span>
-        <h2 className="mt-4 font-display text-2xl uppercase leading-tight text-navy sm:text-3xl">{p.title}</h2>
-        <p className="mt-4 leading-relaxed text-muted-foreground">{p.desc}</p>
-
+        <h2 className="mt-4 font-display text-2xl uppercase leading-tight text-navy sm:text-3xl">
+          {l(p.title)}
+        </h2>
+        <p className="mt-4 leading-relaxed text-muted-foreground">{l(p.summary)}</p>
         <div className="mt-6 rounded-2xl border border-border bg-card p-5 shadow-soft">
           <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-accent">
-            <CheckCircle2 className="h-4 w-4" />
-            {t("work.result")}
+            <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+            {t("projects.result")}
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-foreground/80">{p.result}</p>
+          <p className="mt-2 text-sm leading-relaxed text-foreground/80">{l(p.result)}</p>
         </div>
       </Reveal>
     </article>
@@ -130,63 +103,25 @@ function ProjectBlock({ p, index }: { p: Project; index: number }) {
 
 function Projects() {
   const { t } = useLang();
-
-  const projects: Project[] = [
-    {
-      id: "floors",
-      title: t("work.floors.title"),
-      type: t("work.floors.type"),
-      desc: t("work.floors.desc"),
-      result: t("work.floors.result"),
-      before: suelosAntes,
-      afters: [suelosDespues1, suelosDespues2],
-    },
-    {
-      id: "wall",
-      title: t("work.wall.title"),
-      type: t("work.wall.type"),
-      desc: t("work.wall.desc"),
-      result: t("work.wall.result"),
-      before: muroAntes,
-      afters: [muroDespues],
-    },
-    {
-      id: "paint",
-      title: t("work.paint.title"),
-      type: t("work.paint.type"),
-      desc: t("work.paint.desc"),
-      result: t("work.paint.result"),
-      before: pinturaAntes,
-      afters: [pinturaDespues],
-    },
-    {
-      id: "kitchen",
-      title: t("work.kitchen.title"),
-      type: t("work.kitchen.type"),
-      desc: t("work.kitchen.desc"),
-      result: t("work.kitchen.result"),
-      before: cocina1,
-      afters: [cocina2],
-      beforeLabel: t("work.kitchen.view1"),
-      afterLabel: t("work.kitchen.view2"),
-    },
-  ];
-
   return (
     <section className="container-page py-20 md:py-28">
       <Reveal>
-        <p className="text-xs font-semibold uppercase tracking-widest text-accent">{t("projects.eyebrow")}</p>
+        <p className="text-xs font-semibold uppercase tracking-widest text-accent">
+          {t("projects.eyebrow")}
+        </p>
         <h1 className="mt-3 max-w-3xl text-balance font-display text-4xl uppercase leading-[1.02] text-navy sm:text-5xl md:text-6xl">
           {t("projects.title")}
         </h1>
-        <p className="mt-4 max-w-xl text-muted-foreground">{t("projects.subtitle")}</p>
-        <p className="mt-2 text-sm text-muted-foreground">{t("work.drag")}</p>
       </Reveal>
 
       <div className="mt-16 space-y-20 md:mt-20 md:space-y-28">
         {projects.map((p, i) => (
           <ProjectBlock key={p.id} p={p} index={i} />
         ))}
+      </div>
+
+      <div className="mt-24">
+        <CtaBar />
       </div>
     </section>
   );

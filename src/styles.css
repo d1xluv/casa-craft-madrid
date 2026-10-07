@@ -1,12 +1,19 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/inter";
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Reformas HZ — estilo original (azul marino + azul de marca sobre blanco).
+ * Las tipografías se sirven desde la propia web (sin Google Fonts).
+ * Para cambiar colores, edite los tokens de :root.
+ */
 @theme inline {
-  --font-display: "Archivo", "Inter", system-ui, sans-serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Variable", "Inter Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -36,12 +43,21 @@
   --color-sand: var(--sand);
   --color-ink: var(--ink);
   --color-navy: var(--navy);
+
+  /* Alias usados por el visor de fotos, el formulario y los textos legales */
+  --color-paper: var(--background);
+  --color-stone: var(--sand);
+  --color-line: var(--border);
+  --color-line-strong: oklch(0.8 0.02 250);
+  --color-navy-deep: oklch(0.2 0.06 258);
+  --color-sky: oklch(0.75 0.12 250);
+  --color-success: oklch(0.5 0.12 155);
 }
 
 :root {
   --radius: 0.75rem;
 
-  /* Brand palette taken from the Reformas HZ logo: navy + bright blue on clean white */
+  /* Paleta del logo de Reformas HZ: azul marino + azul vivo sobre blanco */
   --background: oklch(0.99 0.003 250);
   --foreground: oklch(0.24 0.055 258);
   --ink: oklch(0.28 0.09 258);
@@ -62,7 +78,7 @@
   --muted: oklch(0.95 0.014 250);
   --muted-foreground: oklch(0.5 0.03 255);
 
-  --accent: oklch(0.56 0.175 255);               /* bright brand blue */
+  --accent: oklch(0.56 0.175 255);
   --accent-foreground: oklch(0.99 0.003 250);
   --ember: oklch(0.56 0.175 255);
   --ember-foreground: oklch(0.99 0.003 250);
@@ -78,84 +94,411 @@
   --gradient-ink: linear-gradient(180deg, oklch(0.3 0.1 258), oklch(0.2 0.06 258));
   --shadow-ember: 0 24px 60px -22px oklch(0.45 0.16 258 / 0.5);
   --shadow-soft: 0 12px 40px -18px oklch(0.35 0.08 258 / 0.35);
-}
 
-.dark {
-  --background: oklch(0.18 0.03 258);
-  --foreground: oklch(0.97 0.008 250);
-  --card: oklch(0.22 0.04 258);
-  --card-foreground: oklch(0.97 0.008 250);
-  --popover: oklch(0.22 0.04 258);
-  --popover-foreground: oklch(0.97 0.008 250);
-  --primary: oklch(0.97 0.008 250);
-  --primary-foreground: oklch(0.18 0.03 258);
-  --secondary: oklch(0.26 0.045 258);
-  --secondary-foreground: oklch(0.97 0.008 250);
-  --muted: oklch(0.26 0.045 258);
-  --muted-foreground: oklch(0.75 0.02 250);
-  --accent: oklch(0.62 0.17 255);
-  --accent-foreground: oklch(0.16 0.03 258);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
-  h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.03em; font-weight: 700; }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Textos legales */
+  .prose-legal {
+    max-width: 46rem;
+    line-height: 1.7;
+  }
+  .prose-legal h2 {
+    margin-top: 2.5rem;
+    font-size: 1.5rem;
+    color: var(--navy);
+  }
+  .prose-legal h3 {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+  }
+  .prose-legal p,
+  .prose-legal ul,
+  .prose-legal table {
+    margin-top: 0.9rem;
+  }
+  .prose-legal ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose-legal li + li {
+    margin-top: 0.35rem;
+  }
+  .prose-legal a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .prose-legal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+  .prose-legal th,
+  .prose-legal td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .prose-legal th {
+    background: var(--sand);
+    font-weight: 600;
+  }
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .bg-gradient-ember { background-image: var(--gradient-ember); }
-  .bg-gradient-ink { background-image: var(--gradient-ink); }
-  .shadow-ember { box-shadow: var(--shadow-ember); }
-  .shadow-soft { box-shadow: var(--shadow-soft); }
-  .container-page { @apply mx-auto w-full max-w-7xl px-6 md:px-10; }
-
-  /* Entrance animations (hero) */
-  @keyframes hz-rise {
-    from { opacity: 0; transform: translateY(22px); }
-    to { opacity: 1; transform: translateY(0); }
+  .text-balance {
+    text-wrap: balance;
   }
-  @keyframes hz-zoom {
-    from { opacity: 0; transform: scale(1.06); }
-    to { opacity: 1; transform: scale(1); }
+  .bg-gradient-ember {
+    background-image: var(--gradient-ember);
   }
-  .animate-rise { animation: hz-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
-  .animate-zoom { animation: hz-zoom 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .bg-gradient-ink {
+    background-image: var(--gradient-ink);
+  }
+  .shadow-ember {
+    box-shadow: var(--shadow-ember);
+  }
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 
-  /* Buttons: soft press + sheen */
+  /* Botones: ligera elevación + brillo */
   .btn-motion {
-    @apply relative overflow-hidden transition-all duration-300 ease-out will-change-transform;
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
   }
-  .btn-motion:hover { transform: translateY(-2px); }
-  .btn-motion:active { transform: translateY(0) scale(0.985); }
+  .btn-motion:active {
+    transform: translateY(0) scale(0.985);
+  }
   .btn-motion::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.28) 50%, transparent 65%);
+    background: linear-gradient(
+      110deg,
+      transparent 35%,
+      rgb(255 255 255 / 0.28) 50%,
+      transparent 65%
+    );
     transform: translateX(-120%);
     transition: transform 0.7s ease;
     pointer-events: none;
   }
-  .btn-motion:hover::after { transform: translateX(120%); }
-
+  @media (hover: hover) {
+    .btn-motion:hover {
+      transform: translateY(-2px);
+    }
+    .btn-motion:hover::after {
+      transform: translateX(120%);
+    }
+    .card-lift:hover {
+      transform: translateY(-6px);
+    }
+  }
   .card-lift {
     @apply transition-all duration-500 ease-out;
   }
-  .card-lift:hover { transform: translateY(-6px); }
 
   @media (prefers-reduced-motion: reduce) {
-    .animate-rise, .animate-zoom { animation: none; }
-    .btn-motion, .card-lift, .btn-motion::after { transition: none; transform: none; }
+    .btn-motion,
+    .card-lift,
+    .btn-motion::after {
+      transition: none !important;
+      transform: none !important;
+    }
   }
 }
 
+/* Entrada de la portada */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hz-rise {
+    from {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+  }
+  @keyframes hz-zoom {
+    from {
+      opacity: 0;
+      transform: scale(1.06);
+    }
+  }
+  .animate-rise {
+    animation: hz-rise 0.8s var(--ease-out) both;
+  }
+  .animate-zoom {
+    animation: hz-zoom 1.1s var(--ease-out) both;
+  }
+
+  /*
+   * Aparición al hacer scroll: solo si JS está activo (clase .js en <html>),
+   * así el contenido nunca queda invisible.
+   */
+  .js [data-reveal] {
+    transition:
+      opacity 700ms var(--ease-out),
+      transform 700ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal]:not([data-shown]) {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* Visor de fotos (<dialog> nativo) */
+dialog.lightbox {
+  width: 100vw;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: oklch(0.15 0.03 258 / 0.96);
+  color: white;
+}
+dialog.lightbox::backdrop {
+  background: oklch(0.15 0.03 258 / 0.6);
+}
+@media (prefers-reduced-motion: no-preference) {
+  dialog.lightbox[open] {
+    animation: hz-fade 200ms var(--ease-out);
+  }
+  @keyframes hz-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  .lightbox-img {
+    animation: hz-zoom-in 260ms var(--ease-out);
+  }
+  @keyframes hz-zoom-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+  }
+}
+
+/*
+ * Ilustraciones animadas de los servicios (src/components/site/ServiceScene.tsx).
+ * Cada pieza lleva data-a="rise|drop|pop|grow|draw|fade|slide" y un retardo --d.
+ * Se reproducen al entrar en pantalla (atributo data-play). Con movimiento
+ * reducido se muestra directamente la escena terminada.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .scene [data-a] {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+  }
+  .js .scene:not([data-play]) [data-a] {
+    opacity: 0;
+  }
+  .scene[data-play] [data-a] {
+    animation-duration: 650ms;
+    animation-timing-function: var(--ease-out);
+    animation-fill-mode: both;
+    animation-delay: var(--d, 0ms);
+  }
+  .scene[data-play] [data-a="rise"] {
+    animation-name: sc-rise;
+  }
+  .scene[data-play] [data-a="drop"] {
+    animation-name: sc-drop;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .scene[data-play] [data-a="pop"] {
+    animation-name: sc-pop;
+    transform-origin: 50% 50%;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .scene[data-play] [data-a="grow"] {
+    animation-name: sc-grow;
+    transform-origin: 50% 100%;
+  }
+  .scene[data-play] [data-a="growx"] {
+    animation-name: sc-growx;
+    transform-origin: 0% 50%;
+    animation-duration: 900ms;
+  }
+  .scene[data-play] [data-a="fade"] {
+    animation-name: sc-fade;
+  }
+  .scene[data-play] [data-a="slide"] {
+    animation-name: sc-slide;
+  }
+  .scene[data-play] [data-a="draw"] {
+    stroke-dasharray: 1;
+    animation-name: sc-draw;
+    animation-duration: 900ms;
+  }
+  .scene[data-play] [data-loop="bob"] {
+    animation:
+      sc-pop 650ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) both,
+      sc-bob 2.6s ease-in-out calc(var(--d, 0ms) + 700ms) infinite;
+  }
+  .scene[data-play] [data-loop="blink"] {
+    animation:
+      sc-fade 400ms ease-out var(--d, 0ms) both,
+      sc-blink 2.4s ease-in-out calc(var(--d, 0ms) + 400ms) infinite;
+  }
+
+  @keyframes sc-rise {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+  }
+  @keyframes sc-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-90px);
+    }
+  }
+  @keyframes sc-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+  }
+  @keyframes sc-grow {
+    from {
+      opacity: 0;
+      transform: scaleY(0);
+    }
+  }
+  @keyframes sc-growx {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes sc-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes sc-slide {
+    from {
+      opacity: 0;
+      transform: translateX(-60px);
+    }
+  }
+  @keyframes sc-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .scene[data-play] [data-a="roll"] {
+    animation-name: sc-roll;
+  }
+  .scene[data-play] [data-a="flash"] {
+    animation-name: sc-flash;
+    animation-duration: 2200ms;
+  }
+  @keyframes sc-roll {
+    from {
+      transform: translateX(var(--dx, 0px));
+    }
+  }
+  @keyframes sc-flash {
+    0% {
+      opacity: 0;
+    }
+    25%,
+    65% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes sc-bob {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes sc-blink {
+    50% {
+      opacity: 0.35;
+    }
+  }
+}
+
+/* Portada: banda de servicios que se desliza y barra de progreso de cada vista */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hz-marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .hz-marquee {
+    animation: hz-marquee 60s linear infinite;
+  }
+  @keyframes hz-progress {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  .hz-progress {
+    transform-origin: left;
+    animation: hz-progress 4.5s linear both;
+  }
+}
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.14);
+}
