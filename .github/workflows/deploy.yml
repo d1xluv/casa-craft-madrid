@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  # Una vez por semana (lunes, 06:00 UTC) para refrescar las reseñas de Google.
+  schedule:
+    - cron: "0 6 * * 1"
 
 permissions:
   contents: read
@@ -30,6 +33,8 @@ jobs:
       - name: Build application
         run: npm run build
         env:
+          # Clave de Google Places para descargar las reseñas (Settings → Secrets → Actions).
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
           # Custom domain (reformashz.com) serves from the root.
           # Use "/casa-craft-madrid/" only if publishing to the project URL
           # https://d1xluv.github.io/casa-craft-madrid/ instead.

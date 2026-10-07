@@ -1,18 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  CheckCircle2,
-  FileText,
-  MessageCircle,
-  Pause,
-  Phone,
-  Play,
-  SkipForward,
-} from "lucide-react";
+import { ArrowRight, FileText, MessageCircle, Pause, Phone, Play, SkipForward } from "lucide-react";
 import { useLang, type Localized } from "@/lib/i18n";
 import { services } from "@/content/services";
-import { values } from "@/content/process";
 import { PHONE_DISPLAY, TEL_URL, WHATSAPP_URL } from "@/lib/contact";
 import { createHouseScene, type HouseSceneState } from "./house-scene";
 
@@ -37,7 +27,6 @@ const TXT = {
   pause: { es: "Pausar animación", en: "Pause animation" },
   play: { es: "Reproducir animación", en: "Play animation" },
   next: { es: "Siguiente vista", en: "Next view" },
-  why: { es: "Por qué Reformas HZ", en: "Why Reformas HZ" },
 } satisfies Record<string, Localized>;
 
 /** Servicios destacados en la portada (ids de src/content/services.ts). */
@@ -219,31 +208,6 @@ export function HomeHero() {
               aria-hidden="true"
             />
           </Link>
-        </div>
-
-        {/* Tarjeta de compromisos + vista actual */}
-        <div className="relative z-20 order-4 mx-6 mb-6 rounded-2xl border border-white/15 bg-[oklch(0.2_0.06_260/0.82)] p-5 shadow-2xl backdrop-blur-md md:absolute md:bottom-12 md:right-12 md:m-0 md:hidden md:w-72 xl:block lg:bottom-14 lg:right-16">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/60">
-            {l(TXT.why)}
-          </p>
-          <ul className="mt-3 space-y-2">
-            {values.map((v) => (
-              <li key={v.title.es} className="flex items-center gap-2 text-sm font-medium">
-                <CheckCircle2
-                  className="h-4 w-4 shrink-0 text-[oklch(0.78_0.12_250)]"
-                  aria-hidden="true"
-                />
-                {l(v.title)}
-              </li>
-            ))}
-          </ul>
-          <p
-            className="mt-4 border-t border-white/15 pt-3 text-xs text-white/65"
-            aria-live="polite"
-          >
-            <span className="tabular-nums text-white">0{state.scene + 1}</span> / 03 ·{" "}
-            {l(SCENES[state.scene])} · {l(TXT.area)}
-          </p>
         </div>
       </div>
     </section>

@@ -11,6 +11,7 @@ export const NAV_LINKS: { to: string; key: UiKey }[] = [
   { to: "/servicios", key: "nav.services" },
   { to: "/proyectos", key: "nav.projects" },
   { to: "/sobre-mi", key: "nav.about" },
+  { to: "/resenas", key: "nav.reviews" },
   { to: "/contacto", key: "nav.contact" },
 ];
 
@@ -61,13 +62,13 @@ export function Nav() {
             <span className="block font-display text-lg font-extrabold uppercase tracking-tight text-navy">
               Reformas <span className="text-accent">HZ</span>
             </span>
-            <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block lg:hidden xl:block">
+            <span className="hidden text-[11px] uppercase tracking-widest text-muted-foreground sm:block">
               {t("brand.tagline")}
             </span>
           </span>
         </Link>
 
-        <nav aria-label={t("nav.main")} className="hidden items-center gap-5 lg:flex xl:gap-7">
+        <nav aria-label={t("nav.main")} className="hidden items-center gap-5 xl:flex xl:gap-7">
           {NAV_LINKS.map((l) => (
             <Link
               key={l.to}
@@ -84,7 +85,7 @@ export function Nav() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <a
             href={GOOGLE_REVIEW_URL}
             target="_blank"
@@ -116,7 +117,7 @@ export function Nav() {
         <button
           ref={toggleRef}
           type="button"
-          className="grid h-11 w-11 place-items-center rounded-md lg:hidden"
+          className="grid h-11 w-11 place-items-center rounded-md xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-controls="mobile-menu"
@@ -133,7 +134,7 @@ export function Nav() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="border-t border-border bg-background lg:hidden"
+        className="border-t border-border bg-background xl:hidden"
       >
         <nav aria-label={t("nav.main")} className="container-page flex flex-col gap-1 py-4">
           {NAV_LINKS.map((l) => (

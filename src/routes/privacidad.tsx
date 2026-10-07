@@ -154,6 +154,14 @@ function Privacy() {
         envía nada hasta que usted lo confirma.
       </p>
 
+      <h3>Reseñas de Google</h3>
+      <p>
+        La página de reseñas muestra opiniones que sus autores han publicado en Google, con su
+        nombre público tal y como aparece allí y un enlace a la reseña original. Se obtienen de
+        Google al publicar la web; su navegador no conecta con Google al verlas. Si es autor de una
+        reseña y quiere que no se muestre aquí, escríbanos.
+      </p>
+
       <h2>7. Sus derechos</h2>
       <p>
         Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación del

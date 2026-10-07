@@ -13,6 +13,7 @@ import { LangProvider, useLang } from "@/lib/i18n";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { MobileActionBar } from "@/components/site/MobileActionBar";
+import { ChatWidget } from "@/components/site/ChatWidget";
 
 function NotFoundComponent() {
   const { t } = useLang();
@@ -148,6 +149,7 @@ function RootComponent() {
           <Footer />
         </div>
         <MobileActionBar />
+        <ChatWidget />
       </LangProvider>
     </QueryClientProvider>
   );

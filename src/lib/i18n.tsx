@@ -176,6 +176,15 @@ const ui = {
   "contact.form.info.more": { es: "Más información", en: "More information" },
   "faq.title": { es: "Preguntas frecuentes", en: "Frequently asked questions" },
 
+  "nav.reviews": { es: "Reseñas", en: "Reviews" },
+  "reviews.intro": {
+    es: "Opiniones publicadas por nuestros clientes en Google. Se actualizan automáticamente.",
+    en: "Reviews published by our clients on Google. They update automatically.",
+  },
+  "reviews.onGoogle": { es: "Ver en", en: "View on" },
+  "reviews.count": { es: "reseñas en", en: "reviews on" },
+  "reviews.seeAll": { es: "Ver todas en Google", en: "See all on Google" },
+  "reviews.all": { es: "Ver todas las reseñas", en: "See all reviews" },
   "reviews.eyebrow": { es: "Reseñas", en: "Reviews" },
   "reviews.title": { es: "Lo que opinan nuestros clientes.", en: "What our clients say." },
   "reviews.text": {

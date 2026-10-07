@@ -43,6 +43,7 @@ export default defineConfig(
             { path: "/servicios/reparaciones" },
             { path: "/proyectos" },
             { path: "/sobre-mi" },
+            { path: "/resenas" },
             { path: "/contacto" },
             { path: "/aviso-legal" },
             { path: "/privacidad" },

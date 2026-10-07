@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SobreMiRouteImport } from './routes/sobre-mi'
+import { Route as ResenasRouteImport } from './routes/resenas'
 import { Route as ProyectosRouteImport } from './routes/proyectos'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -22,6 +23,11 @@ import { Route as ServiciosIdRouteImport } from './routes/servicios.$id'
 const SobreMiRoute = SobreMiRouteImport.update({
   id: '/sobre-mi',
   path: '/sobre-mi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResenasRoute = ResenasRouteImport.update({
+  id: '/resenas',
+  path: '/resenas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProyectosRoute = ProyectosRouteImport.update({
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
+  '/resenas': typeof ResenasRoute
   '/sobre-mi': typeof SobreMiRoute
   '/servicios/$id': typeof ServiciosIdRoute
   '/servicios/': typeof ServiciosIndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
+  '/resenas': typeof ResenasRoute
   '/sobre-mi': typeof SobreMiRoute
   '/servicios/$id': typeof ServiciosIdRoute
   '/servicios': typeof ServiciosIndexRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/privacidad': typeof PrivacidadRoute
   '/proyectos': typeof ProyectosRoute
+  '/resenas': typeof ResenasRoute
   '/sobre-mi': typeof SobreMiRoute
   '/servicios/$id': typeof ServiciosIdRoute
   '/servicios/': typeof ServiciosIndexRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/privacidad'
     | '/proyectos'
+    | '/resenas'
     | '/sobre-mi'
     | '/servicios/$id'
     | '/servicios/'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/privacidad'
     | '/proyectos'
+    | '/resenas'
     | '/sobre-mi'
     | '/servicios/$id'
     | '/servicios'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/privacidad'
     | '/proyectos'
+    | '/resenas'
     | '/sobre-mi'
     | '/servicios/$id'
     | '/servicios/'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   PrivacidadRoute: typeof PrivacidadRoute
   ProyectosRoute: typeof ProyectosRoute
+  ResenasRoute: typeof ResenasRoute
   SobreMiRoute: typeof SobreMiRoute
   ServiciosIdRoute: typeof ServiciosIdRoute
   ServiciosIndexRoute: typeof ServiciosIndexRoute
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/sobre-mi'
       fullPath: '/sobre-mi'
       preLoaderRoute: typeof SobreMiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resenas': {
+      id: '/resenas'
+      path: '/resenas'
+      fullPath: '/resenas'
+      preLoaderRoute: typeof ResenasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proyectos': {
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   PrivacidadRoute: PrivacidadRoute,
   ProyectosRoute: ProyectosRoute,
+  ResenasRoute: ResenasRoute,
   SobreMiRoute: SobreMiRoute,
   ServiciosIdRoute: ServiciosIdRoute,
   ServiciosIndexRoute: ServiciosIndexRoute,
