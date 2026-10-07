@@ -176,6 +176,14 @@ const ui = {
   "contact.form.info.more": { es: "Más información", en: "More information" },
   "faq.title": { es: "Preguntas frecuentes", en: "Frequently asked questions" },
 
+  "reviews.eyebrow": { es: "Reseñas", en: "Reviews" },
+  "reviews.title": { es: "Lo que opinan nuestros clientes.", en: "What our clients say." },
+  "reviews.text": {
+    es: "¿Hemos trabajado en su casa? Su opinión en Google nos ayuda mucho y orienta a otros clientes.",
+    en: "Have we worked on your home? Your Google review helps us a lot and guides other clients.",
+  },
+  "reviews.cta": { es: "Escribir una reseña en Google", en: "Write a Google review" },
+  "reviews.star": { es: "Dejar una reseña en Google", en: "Leave a Google review" },
   "footer.tag": {
     es: "Reformas integrales · Albañilería · Pintura y alisado · Baños y cocinas · Suelos y fachadas",
     en: "Full renovations · Bricklaying · Painting & skimming · Bathrooms and kitchens · Floors and façades",

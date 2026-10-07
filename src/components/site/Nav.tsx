@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone, Mail, Star } from "lucide-react";
+import { GOOGLE_REVIEW_URL } from "@/content/reviews";
 import { useLang, type UiKey } from "@/lib/i18n";
 import { LanguageToggle } from "./LanguageToggle";
 import { EMAIL, MAILTO_URL, PHONE_DISPLAY, TEL_URL, WHATSAPP_URL } from "@/lib/contact";
@@ -84,6 +85,16 @@ export function Nav() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="grid h-10 w-10 place-items-center rounded-full border border-border bg-background text-amber-500 shadow-soft transition-all hover:scale-105 hover:border-amber-400"
+            aria-label={t("reviews.star")}
+            title={t("reviews.star")}
+          >
+            <Star className="h-4 w-4 fill-current" aria-hidden="true" />
+          </a>
           <LanguageToggle />
           <a
             href={TEL_URL}
@@ -138,7 +149,19 @@ export function Nav() {
             </Link>
           ))}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3 px-2">
-            <LanguageToggle />
+            <div className="flex items-center gap-2">
+              <a
+                href={GOOGLE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid h-11 w-11 place-items-center rounded-full border border-border bg-background text-amber-500 shadow-soft transition-all hover:scale-105 hover:border-amber-400"
+                aria-label={t("reviews.star")}
+                title={t("reviews.star")}
+              >
+                <Star className="h-4 w-4 fill-current" aria-hidden="true" />
+              </a>
+              <LanguageToggle />
+            </div>
             <div className="flex gap-2">
               <a
                 href={TEL_URL}

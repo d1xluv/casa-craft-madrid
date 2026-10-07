@@ -93,6 +93,10 @@ function Cookies() {
           sus propias políticas.
         </li>
         <li>
+          <strong>Reseñas de Google:</strong> la estrella y el botón de reseñas son enlaces normales
+          a Google; no se carga nada de Google al visitar la web.
+        </li>
+        <li>
           <strong>Formulario de contacto:</strong> al enviarlo, los datos se transmiten a{" "}
           {legal.formProvider} para que nos lleguen por correo. El envío no instala cookies en esta
           web. Más información en la <Link to="/privacidad">política de privacidad</Link>.

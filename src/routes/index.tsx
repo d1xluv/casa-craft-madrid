@@ -8,6 +8,7 @@ import { services } from "@/content/services";
 import { getProject } from "@/content/projects";
 import { values } from "@/content/process";
 import { HomeHero } from "@/components/site/HomeHero";
+import { Reviews } from "@/components/site/Reviews";
 import { WorkCard } from "@/components/site/WorkCard";
 import { ServiceCard } from "@/components/site/ServiceCard";
 import { Reveal } from "@/components/site/Reveal";
@@ -152,6 +153,8 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <Reviews />
 
       {/* CONTACTO */}
       <section className="container-page">
