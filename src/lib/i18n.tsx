@@ -27,20 +27,10 @@ const ui = {
   "brand.motto": { es: "Su hogar, en buenas manos", en: "Your home, in good hands" },
   "brand.quote": { es: "Presupuestos sin compromiso", en: "No-obligation quotes" },
 
-  "hero.eyebrow": {
-    es: "Reformas · Albañilería · Pintura",
-    en: "Renovations · Bricklaying · Painting",
-  },
   "hero.title": {
-    es: "Reformas y pintura con acabados de primera.",
-    en: "Renovations and painting with a first-class finish.",
+    es: "Reformas en Madrid con acabados de primera.",
+    en: "Renovations in Madrid with a first-class finish.",
   },
-  "hero.subtitle": {
-    es: "Reformas integrales, albañilería y pintura en Madrid, Guadalajara y zonas cercanas.",
-    en: "Full renovations, bricklaying and painting in Madrid, Guadalajara and nearby areas.",
-  },
-  "hero.cta.primary": { es: "Contactar · 671 155 809", en: "Contact us · 671 155 809" },
-  "hero.cta.secondary": { es: "Ver proyectos", en: "View projects" },
 
   "services.eyebrow": { es: "Nuestros servicios", en: "Our services" },
   "services.title": {

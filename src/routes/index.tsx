@@ -1,12 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, FileText, Phone, MapPin, ShieldCheck, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, FileText, Phone, MapPin } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 import { TEL_URL, WHATSAPP_URL, PHONE_DISPLAY } from "@/lib/contact";
 import { business, SITE_URL } from "@/content/site";
 import { services } from "@/content/services";
 import { getProject } from "@/content/projects";
-import { values } from "@/content/process";
 import { HomeHero } from "@/components/site/HomeHero";
 import { Reviews } from "@/components/site/Reviews";
 import { WorkCard } from "@/components/site/WorkCard";
@@ -90,26 +89,6 @@ function Home() {
   return (
     <>
       <HomeHero />
-
-      {/* COMPROMISOS */}
-      <section className="border-b border-border bg-background">
-        <div className="container-page grid gap-6 py-10 sm:grid-cols-3">
-          {values.map((v, i) => {
-            const Icon = [ShieldCheck, Clock, Sparkles][i] ?? ShieldCheck;
-            return (
-              <Reveal key={v.title.es} delay={i * 70}>
-                <div className="flex gap-3">
-                  <Icon className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent" aria-hidden="true" />
-                  <div>
-                    <h2 className="font-display text-base">{l(v.title)}</h2>
-                    <p className="mt-1 text-sm text-muted-foreground">{l(v.text)}</p>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
 
       {/* SERVICIOS */}
       <section className="bg-sand/40">

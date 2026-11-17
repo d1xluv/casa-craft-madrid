@@ -477,28 +477,3 @@ dialog.lightbox::backdrop {
     }
   }
 }
-
-/* Portada: banda de servicios que se desliza y barra de progreso de cada vista */
-@media (prefers-reduced-motion: no-preference) {
-  @keyframes hz-marquee {
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  .hz-marquee {
-    animation: hz-marquee 60s linear infinite;
-  }
-  @keyframes hz-progress {
-    from {
-      transform: scaleX(0);
-    }
-  }
-  .hz-progress {
-    transform-origin: left;
-    animation: hz-progress 4.5s linear both;
-  }
-}
-.text-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgb(255 255 255 / 0.14);
-}
